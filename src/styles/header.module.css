@@ -1,3 +1,7 @@
 .profileIcon {
   background-image: url('profileIcon.svg');
 }
+
+.searchIcon {
+  background-image: url('searchIcon.svg');
+}
