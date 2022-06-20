@@ -1,45 +1,45 @@
-import React, {Component} from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import profileIcon from '../images/profileIcon.svg';
 
 class Header extends Component {
-constructor() {
-  super();
-  this.state = {
-    toggleInput: false,
+  constructor() {
+    super();
+    this.state = {
+      toggleInput: false,
+    };
   }
-}
-  handleSearch = (event) => {
-  event.preventDefault();
-    if (toggleInput) {
-      return (
-      <input data-testid="search-input" />)
-    }
-    this.setState({toggleInput: false});
 
+  handleSearch = () => {
+    // this.setState({toggleInput: false});
+    if (!toggleInput) {
+      this.setState({ toggleInput: true });
+      return (
+        <input data-testid="search-input" />);
+    }
   }
 
   render() {
-    const {history} = this.props;
-    return(
-      <div> 
+    const { history } = this.props;
+    return (
+      <div>
         <form>
-          <button onClick={history.push('/profile')} type='button' data-testid="profile-top-btn">
-            <i className='profileIcon'></i>
+          <button onClick={ history.push('/profile') } type="button" data-testid="profile-top-btn">
+            {/* <i className='profileIcon'></i> */}
+            <img src={ profileIcon } alt="profile icon" />
           </button>
           <span data-testid="page-title">{}</span>
-          <button 
-            onClick={ this.handleSearch } 
-            type='submit' 
+          <input
+            onClick={ this.handleSearch }
+            type="checkbox"
             data-testid="search-top-btn"
           >
-            {}
-          </button>
+            <i className="searchIcon" />
+          </input>
         </form>
       </div>
-    )
+    );
   }
-
-
 }
 
 export default connect()(Header);
