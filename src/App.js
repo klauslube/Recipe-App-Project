@@ -1,17 +1,18 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Switch, Route } from 'react-router-dom';
-import { Login } from './components/Login'
-import { store } from '../src/redux/store/index';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import Login from './components/Login';
+import store from './redux/store/index';
 
 function App() {
   return (
     <Provider store={ store }>
-      <Switch>
-        <Route exact path='/' component={ Login } />
-        {/* <Route exact path='/foods' component={}/>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          {/* <Route exact path='/foods' component={}/>
         <Route exact path='/drinks' component={}/>
         <Route exact path='/foods/{id-da-receita}' component={}/>
         <Route exact path='/drinks/{id-da-receita}' component={}/>
@@ -26,7 +27,9 @@ function App() {
         <Route exact path='/profile' component={}/>
         <Route exact path='/done-recipes' component={}/>
         <Route exact path='/favorite-recipes' component={}/> */}
-      </Switch>
+        </Switch>
+      </BrowserRouter>
+
     </Provider>
   );
 }
