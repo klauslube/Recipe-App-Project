@@ -9,14 +9,17 @@ constructor() {
     toggleInput: false,
   }
 }
-  handleSearch = (event) => {
-  event.preventDefault();
-    if (toggleInput) {
+  handleSearch = () => {
+    // this.setState({toggleInput: false});
+    if (!toggleInput) {
+      this.setState({toggleInput: true});
       return (
       <input data-testid="search-input" />)
     }
-    this.setState({toggleInput: false});
-
+    if (toggleInput) {
+      
+    }
+  
   }
 
   render() {
@@ -28,13 +31,13 @@ constructor() {
             <i className='profileIcon'></i>
           </button>
           <span data-testid="page-title">{}</span>
-          <button 
-            onClick={ this.handleSearch } 
-            type='submit' 
+          <input 
+            onClick={ this.handleSearch }
+            type='checkbox' 
             data-testid="search-top-btn"
           >
             {}
-          </button>
+          </input>
         </form>
         <SearchBar />
       </div>
