@@ -29,7 +29,7 @@ export default function Login(props) {
         />
       </label>
       <label htmlFor="login_password">
-        Email
+        Password
         <input
           data-testid="password-input"
           type="password"
