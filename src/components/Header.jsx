@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 class Header extends Component {
   constructor() {
@@ -13,16 +14,12 @@ class Header extends Component {
   }
 
   handleSearch = () => {
-    // this.setState({toggleInput: false});
-    if (!toggleInput) {
-      this.setState({ toggleInput: true });
-      return (
-        <input data-testid="search-input" />);
-    }
+    this.setState((prev) => this.setState({ toggleInput: !prev.toggleInput }));
   }
 
   render() {
     const { history } = this.props;
+    const { toggleInput } = this.state;
     return (
       <div>
         <form>
@@ -43,14 +40,16 @@ class Header extends Component {
             <img src={ searchIcon } alt="search icon" />
           </button>
         </form>
+        <div>
+          {toggleInput && <SearchBar />}
+        </div>
       </div>
     );
   }
 }
 
-// Header.propTypes = {
-//   history: 
-// }
-
+Header.propTypes = {
+  history: PropTypes.shape({ push: PropTypes.func.isRequired }).isRequired,
+};
 
 export default connect()(Header);

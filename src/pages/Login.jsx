@@ -42,7 +42,7 @@ export default function Login(props) {
       <button
         type="submit"
         onClick={ handleSubmit }
-        disabled={ !(password.length > minLengthPass && regex.test(email)) }
+        disabled={ !(password.length >= minLengthPass && regex.test(email)) }
         data-testid="login-submit-btn"
       >
         Enter
