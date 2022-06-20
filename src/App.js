@@ -2,15 +2,15 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route } from 'react-router-dom';
-import { Login } from './components/Login'
-import { store } from '../src/redux/store/index';
 import { Provider } from 'react-redux';
+import Login from './components/Login';
+import store from './redux/store';
 
 function App() {
   return (
     <Provider store={ store }>
       <Switch>
-        <Route exact path='/' component={ Login } />
+        <Route exact path="/" component={ Login } />
         {/* <Route exact path='/foods' component={}/>
         <Route exact path='/drinks' component={}/>
         <Route exact path='/foods/{id-da-receita}' component={}/>
