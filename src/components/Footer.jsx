@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import foodIcon from '../images/mealIcon.svg';
+import '../styles/Footer.css';
 
 export default function Footer() {
   const history = useHistory();
@@ -13,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <div atributo data-testid="footer" id="footer">
+    <div atributo data-testid="footer" id="footer" className="footer">
       <input
         type="image"
         data-testid="drinks-bottom-btn"
