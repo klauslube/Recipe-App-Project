@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../components/Header';
 
-export default function DrinksProgress() {
+export default function Nationalities() {
   return (
     <div>
       <Header />
-      <h1>Drinks Progress</h1>
+      <h1>Nationalities</h1>
     </div>
   );
 }

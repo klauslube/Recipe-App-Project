@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 
-function SearchBar(props) {
-  const { history } = props;
+function SearchBar() {
+  const history = useHistory();
   const { location } = history;
   const [searchText, setSearch] = useState('');
   const [radioSelected, setRadio] = useState(1);
@@ -80,14 +80,5 @@ function SearchBar(props) {
     </section>
   );
 }
-
-SearchBar.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
 
 export default SearchBar;

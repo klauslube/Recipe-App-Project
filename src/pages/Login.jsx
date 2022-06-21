@@ -15,7 +15,7 @@ export default function Login(props) {
   };
 
   const regex = /\S+@\S+\.\S+/;
-  const minLengthPass = 6;
+  const minLengthPass = 7;
   return (
     <form onSubmit={ handleSubmit }>
       <label htmlFor="login_email">
