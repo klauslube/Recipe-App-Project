@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchApi from '../helpers/fetchApi';
+import { actionCreators } from '../redux/actions';
 
 function SearchBar(props) {
   const { history } = props;
   const { location } = history;
   const [searchText, setSearch] = useState('');
   const [radioSelected, setRadio] = useState(1);
+  const dispatch = useDispatch();
 
   const changeSearch = ({ target }) => {
     setSearch(target.value);
   };
 
   const handleApiResponse = (res) => {
+    const { setMealsAction } = actionCreators;
     console.log(res);
+    dispatch(setMealsAction(res.meals));
   };
 
   const submitSearch = (e) => {
