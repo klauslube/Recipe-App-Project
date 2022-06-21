@@ -6,7 +6,6 @@ export default function Drinks() {
   return (
     <div>
       <Header title="Drinks" search />
-      <h1>Drinks</h1>
       <Footer />
     </div>
   );
