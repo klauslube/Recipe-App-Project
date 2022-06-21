@@ -10,11 +10,9 @@ function SearchBar() {
 
   const submitSearch = (e) => {
     e.preventDefault();
-    if (radioSelected === 2 && searchText.length === 1) {
-      alert('Your search must have only 1 (one) character');
-      console.log('ok');
+    if (radioSelected === 2 && searchText.length !== 1) {
+      global.alert('Your search must have only 1 (one) character');
     }
-    console.log(searchText, radioSelected);
   };
 
   return (

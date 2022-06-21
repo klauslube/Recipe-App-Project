@@ -5,7 +5,8 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email }));
@@ -16,7 +17,7 @@ export default function Login(props) {
   const regex = /\S+@\S+\.\S+/;
   const minLengthPass = 6;
   return (
-    <form>
+    <form onSubmit={ handleSubmit }>
       <label htmlFor="login_email">
         Email
         <input
@@ -41,7 +42,6 @@ export default function Login(props) {
       </label>
       <button
         type="submit"
-        onClick={ handleSubmit }
         disabled={ !(password.length >= minLengthPass && regex.test(email)) }
         data-testid="login-submit-btn"
       >

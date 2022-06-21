@@ -14,7 +14,9 @@ class Header extends Component {
   }
 
   handleSearch = () => {
-    this.setState((prev) => this.setState({ toggleInput: !prev.toggleInput }));
+    const { toggleInput } = this.state;
+    const toggle = !toggleInput;
+    this.setState({ toggleInput: toggle });
   }
 
   render() {
@@ -22,23 +24,21 @@ class Header extends Component {
     const { toggleInput } = this.state;
     return (
       <div>
-        <form>
-          <input
-            onClick={ () => history.push('/profile') }
-            type="image"
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profile icon"
-          />
-          <span data-testid="page-title">Foods</span>
-          <input
-            onClick={ this.handleSearch }
-            type="image"
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="search icon"
-          />
-        </form>
+        <input
+          onClick={ () => history.push('/profile') }
+          type="image"
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="profile icon"
+        />
+        <span data-testid="page-title">Foods</span>
+        <input
+          onClick={ this.handleSearch }
+          type="image"
+          data-testid="search-top-btn"
+          src={ searchIcon }
+          alt="search icon"
+        />
         <div>
           { toggleInput && <SearchBar /> }
         </div>
