@@ -10,7 +10,6 @@ export default function Header() {
   const history = useHistory();
 
   const PushProfile = () => {
-    console.log('foi');
     history.push('/profile');
   };
 
@@ -25,7 +24,7 @@ export default function Header() {
         src={ profileIcon }
         alt="profile icon"
       />
-      <h1 data-testid="page-title">Foods</h1>
+      <h1 data-testid="page-title">{document.title}</h1>
       <input
         onClick={ handleSearch }
         type="image"
