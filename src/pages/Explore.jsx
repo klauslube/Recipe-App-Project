@@ -6,7 +6,6 @@ export default function Explore() {
   return (
     <div>
       <Header title="Explore" />
-      <h1>Explore</h1>
       <Footer />
     </div>
   );
