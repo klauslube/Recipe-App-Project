@@ -1,15 +1,58 @@
-import React from 'react';
-import Header from './Header';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-class Login extends React.Component {
+export default function Login(props) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  render() {
-    return (
-      <section>
-        <Header />
-      </section>
-    );
-  }
+  const handleSubmit = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+    const { history } = props;
+    history.push('/foods');
+  };
+
+  const regex = /\S+@\S+\.\S+/;
+  const minLengthPass = 6;
+  return (
+    <form>
+      <label htmlFor="login_email">
+        Email
+        <input
+          data-testid="email-input"
+          type="email"
+          name="email"
+          value={ email }
+          onChange={ ({ target: { value } }) => setEmail(value) }
+          id="login_email"
+        />
+      </label>
+      <label htmlFor="login_password">
+        Password
+        <input
+          data-testid="password-input"
+          type="password"
+          name="password"
+          value={ password }
+          onChange={ ({ target: { value } }) => setPassword(value) }
+          id="login_password"
+        />
+      </label>
+      <button
+        type="submit"
+        onClick={ handleSubmit }
+        disabled={ !(password.length > minLengthPass && regex.test(email)) }
+        data-testid="login-submit-btn"
+      >
+        Enter
+      </button>
+    </form>
+  );
 }
 
-export default Login;
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};

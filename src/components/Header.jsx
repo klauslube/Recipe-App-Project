@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
+import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 class Header extends Component {
   constructor() {
@@ -24,23 +27,33 @@ class Header extends Component {
     return (
       <div>
         <form>
-          <button onClick={ history.push('/profile') } type="button" data-testid="profile-top-btn">
-            {/* <i className='profileIcon'></i> */}
+          <button
+            onClick={ history.push('/profile') }
+            type="button"
+            data-testid="profile-top-btn"
+          >
+
             <img src={ profileIcon } alt="profile icon" />
           </button>
           <span data-testid="page-title">{}</span>
-          <input
+          <button
             onClick={ this.handleSearch }
-            type="checkbox"
+            type="button"
             data-testid="search-top-btn"
           >
-            <i className="searchIcon" />
-          </input>
+            <img src={ searchIcon } alt="search icon" />
+          </button>
         </form>
         <SearchBar />
       </div>
     );
   }
 }
+
+Header.propTypes = {
+  history: PropTypes.shape({ func: PropTypes.func.isRequired }).isRequired,
+
+}
+
 
 export default connect()(Header);
