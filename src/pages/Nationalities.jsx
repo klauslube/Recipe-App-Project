@@ -4,8 +4,8 @@ import Header from '../components/Header';
 export default function Nationalities() {
   return (
     <div>
-      <Header />
-      <h1>Nationalities</h1>
+      <Header title="Explore Nationalities" search />
+      <h1>Explore Nationalities</h1>
     </div>
   );
 }

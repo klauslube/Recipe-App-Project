@@ -6,7 +6,7 @@ export default function Profile() {
   const history = useHistory();
   return (
     <div>
-      <Header history={ history } />
+      <Header title="Profile" history={ history } />
       <h1>Profile</h1>
     </div>
   );

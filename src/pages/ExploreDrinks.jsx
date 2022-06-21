@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
+import Header from '../components/Header';
 
 export default function ExploreDrinks() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Drinks" />
       <h1>Explore Drinks</h1>
     </div>
   );

@@ -5,6 +5,6 @@ import Header from '../components/Header';
 export default function Foods() {
   const history = useHistory();
   return (
-    <Header history={ history } />
+    <Header title="Foods" history={ history } search />
   );
 }
