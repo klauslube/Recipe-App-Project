@@ -7,7 +7,19 @@ import Login from './pages/Login';
 import store from './redux/store/index';
 import Foods from './pages/Foods';
 import Profile from './pages/Profile';
-// import Drinks from './pages/Drinks';
+import Drinks from './pages/Drinks';
+import DrinksDetails from './pages/DrinksDetails';
+import FoodsDetails from './pages/FoodsDetails';
+import FoodsProgress from './pages/FoodsProgress';
+import DrinksProgress from './pages/DrinksProgress';
+import Explore from './pages/Explore';
+import ExploreFoodsIngredients from './pages/ExploreFoodsIngredients';
+import ExploreDrinks from './components/ExploreDrinks';
+import ExploreFoods from './components/ExploreFoods';
+import ExploreDrinksIngredients from './pages/ExploreDrinksIngredients';
+import Nationalities from './pages/Nationalities';
+import DoneRecipes from './pages/DoneRecipes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
@@ -17,19 +29,35 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/foods" component={ Foods } />
-          {/* <Route exact path="/drinks" component={ Drinks } /> */}
-          {/* <Route exact path='/foods/{id-da-receita}' component={}/> */}
-          {/* <Route exact path='/drinks/{id-da-receita}' component={}/> */}
-          {/* <Route exact path='/foods/{id-da-receita}/in-progress' component={}/> */}
-          {/* <Route exact path='/drinks/{id-da-receita}/in-progress' component={}/> */}
-          {/* <Route exact path='/explore' component={}/> */}
-          {/* <Route exact path='/explore/foods' component={}/> */}
-          {/* <Route exact path='/explore/drinks' component={}/> */}
-          {/* <Route exact path='/explore/foods/ingredients' component={}/> */}
-          {/* <Route exact path='/explore/drinks/ingredients' component={}/> */}
-          {/* <Route exact path='/explore/foods/nationalities' component={}/> */}
-          {/* <Route exact path='/done-recipes' component={}/> */}
-          {/* <Route exact path='/favorite-recipes' component={}/> */}
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route exact path="/foods/{id-da-receita}" component={ FoodsDetails } />
+          <Route exact path="/drinks/{id-da-receita}" component={ DrinksDetails } />
+          <Route
+            exact
+            path="/foods/{id-da-receita}/in-progress"
+            component={ FoodsProgress }
+          />
+          <Route
+            exact
+            path="/drinks/{id-da-receita}/in-progress"
+            component={ DrinksProgress }
+          />
+          <Route exact path="/explore" component={ Explore } />
+          <Route exact path="/explore/foods" component={ ExploreFoods } />
+          <Route exact path="/explore/drinks" component={ ExploreDrinks } />
+          <Route
+            exact
+            path="/explore/foods/ingredients"
+            component={ ExploreFoodsIngredients }
+          />
+          <Route
+            exact
+            path="/explore/drinks/ingredients"
+            component={ ExploreDrinksIngredients }
+          />
+          <Route exact path="/explore/foods/nationalities" component={ Nationalities } />
+          <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
         </Switch>
       </BrowserRouter>
     </Provider>
