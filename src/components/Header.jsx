@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
@@ -41,9 +41,6 @@ export default function Header({ title, search }) {
 }
 
 Header.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   title: PropTypes.string.isRequired,
   search: PropTypes.bool.isRequired,
 };

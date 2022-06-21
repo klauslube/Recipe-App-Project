@@ -14,7 +14,7 @@ export default function Footer() {
   };
 
   return (
-    <div atributo data-testid="footer" id="footer" className="footer">
+    <div data-testid="footer" id="footer" className="footer">
       <input
         type="image"
         data-testid="drinks-bottom-btn"

@@ -1,19 +1,39 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import fetchApi from '../helpers/fetchApi';
+import { actionCreators } from '../redux/actions';
 
 function SearchBar() {
   const history = useHistory();
   const { location } = history;
   const [searchText, setSearch] = useState('');
   const [radioSelected, setRadio] = useState(1);
+  const dispatch = useDispatch();
 
   const changeSearch = ({ target }) => {
     setSearch(target.value);
   };
 
   const handleApiResponse = (res) => {
-    console.log(res);
+    const { setMealsAction, setDrinksAction } = actionCreators;
+    if (location.pathname === '/foods') {
+      if (res.meals) {
+        dispatch(setMealsAction(res.meals));
+        if (res.meals.length === 1) { // direcionamento para pagina de detalhes
+          const id = res.meals[0].idMeal;
+          history.push(`/foods/${id}`);
+        }
+      } else global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (location.pathname === '/drinks') {
+      if (res.drinks) {
+        dispatch(setDrinksAction(res.drinks));
+        if (res.drinks.length === 1) { // direcionamento para pagina de detalhes
+          const id = res.drinks[0].idDrink;
+          history.push(`/drinks/${id}`);
+        }
+      } else global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
   };
 
   const submitSearch = (e) => {
