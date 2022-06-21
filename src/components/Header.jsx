@@ -34,7 +34,7 @@ export default function Header() {
         alt="search icon"
       />
       <div>
-        { toggle && <SearchBar history={ history } /> }
+        { toggle && <SearchBar /> }
       </div>
     </div>
   );
