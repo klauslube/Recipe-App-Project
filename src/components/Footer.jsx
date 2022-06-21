@@ -20,7 +20,7 @@ export default function Footer() {
         data-testid="drinks-bottom-btn"
         src={ drinkIcon }
         alt="drinks-bottom-btn"
-        id="Drinks"
+        id="drinks"
         onClick={ handleClick }
       />
       <input
@@ -29,7 +29,7 @@ export default function Footer() {
         src={ exploreIcon }
         alt="explore-bottom-btn"
         onClick={ handleClick }
-        id="Explore"
+        id="explore"
       />
       <input
         type="image"
@@ -37,7 +37,7 @@ export default function Footer() {
         src={ foodIcon }
         alt="food-bottom-btn"
         onClick={ handleClick }
-        id="Foods"
+        id="foods"
       />
     </div>
   );
