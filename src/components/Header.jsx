@@ -22,7 +22,7 @@ export default function Header({ title, search }) {
         type="image"
         data-testid="profile-top-btn"
         src={ profileIcon }
-        alt="profile icon"
+        alt="profile-icon"
       />
       <h1 data-testid="page-title">{title}</h1>
       {search
@@ -31,7 +31,7 @@ export default function Header({ title, search }) {
         type="image"
         data-testid="search-top-btn"
         src={ searchIcon }
-        alt="search icon"
+        alt="search-icon"
       />}
       <div>
         { toggle && <SearchBar /> }
@@ -45,5 +45,5 @@ Header.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   title: PropTypes.string.isRequired,
-  search: PropTypes.string.isRequired,
+  search: PropTypes.bool.isRequired,
 };
