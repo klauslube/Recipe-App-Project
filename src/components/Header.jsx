@@ -40,7 +40,7 @@ class Header extends Component {
           alt="search icon"
         />
         <div>
-          { toggleInput && <SearchBar /> }
+          { toggleInput && <SearchBar history={ history } /> }
         </div>
       </div>
     );

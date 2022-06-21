@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import fetchApi from '../helpers/fetchApi';
 
-function SearchBar() {
+function SearchBar(props) {
+  const { history } = props;
+  const { location } = history;
   const [searchText, setSearch] = useState('');
-  const [radioSelected, setRadio] = useState();
+  const [radioSelected, setRadio] = useState(1);
 
   const changeSearch = ({ target }) => {
     setSearch(target.value);
+  };
+
+  const handleApiResponse = (res) => {
+    console.log(res);
   };
 
   const submitSearch = (e) => {
     e.preventDefault();
     if (radioSelected === 2 && searchText.length !== 1) {
       global.alert('Your search must have only 1 (one) character');
+    } else {
+      fetchApi(location.pathname, radioSelected, searchText).then(
+        (res) => handleApiResponse(res),
+      );
     }
   };
 
@@ -68,5 +80,14 @@ function SearchBar() {
     </section>
   );
 }
+
+SearchBar.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default SearchBar;
