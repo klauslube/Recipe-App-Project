@@ -5,7 +5,6 @@ export default function DrinksProgress() {
   return (
     <div>
       <Header title="Drinks Progress" />
-      <h1>Drinks Progress</h1>
     </div>
   );
 }

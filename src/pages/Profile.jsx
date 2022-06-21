@@ -8,7 +8,6 @@ export default function Profile() {
   return (
     <div>
       <Header title="Profile" history={ history } />
-      <h1>Profile</h1>
       <Footer />
     </div>
   );
