@@ -23,25 +23,24 @@ class Header extends Component {
     return (
       <div>
         <form>
-          <button
-            onClick={ history.push('/profile') }
-            type="button"
+          <input
+            onClick={ () => history.push('/profile') }
+            type="image"
             data-testid="profile-top-btn"
-          >
-
-            <img src={ profileIcon } alt="profile icon" />
-          </button>
-          <span data-testid="page-title">{}</span>
-          <button
+            src={ profileIcon }
+            alt="profile icon"
+          />
+          <span data-testid="page-title">Foods</span>
+          <input
             onClick={ this.handleSearch }
-            type="button"
+            type="image"
             data-testid="search-top-btn"
-          >
-            <img src={ searchIcon } alt="search icon" />
-          </button>
+            src={ searchIcon }
+            alt="search icon"
+          />
         </form>
         <div>
-          {toggleInput && <SearchBar />}
+          { toggleInput && <SearchBar /> }
         </div>
       </div>
     );
