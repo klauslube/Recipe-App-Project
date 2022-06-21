@@ -5,7 +5,6 @@ export default function DoneRecipes() {
   return (
     <div>
       <Header title="Done Recipes" />
-      <h1>Done Recipes</h1>
     </div>
   );
 }
