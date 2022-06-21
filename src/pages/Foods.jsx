@@ -8,6 +8,7 @@ export default function Foods() {
   return (
     <>
       <Header history={ history } />
+      <h1>Foods</h1>
       <Footer />
     </>
 
