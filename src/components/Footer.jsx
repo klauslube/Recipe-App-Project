@@ -9,12 +9,12 @@ import '../styles/Footer.css';
 export default function Footer() {
   const history = useHistory();
   const handleClick = (event) => {
-    console.log(event.currentTarget.id);
+    // console.log(event.currentTarget.id);
     history.push(event.currentTarget.id);
   };
 
   return (
-    <div atributo data-testid="footer" id="footer" className="footer">
+    <div data-testid="footer" id="footer" className="footer">
       <input
         type="image"
         data-testid="drinks-bottom-btn"
