@@ -38,9 +38,9 @@ describe('testa o componente Header e suas funcionalidades', () => {
 
     userEvent.click(searchIcon);
     const searchBar = screen.getAllByRole('textbox');
-    expect(searchBar[2]).toBeInTheDocument();
+    expect(searchBar[0]).toBeInTheDocument();
 
     userEvent.click(searchIcon);
-    expect(searchBar[2]).not.toBeInTheDocument();
+    expect(searchBar[0]).not.toBeInTheDocument();
   });
 });
