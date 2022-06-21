@@ -20,7 +20,7 @@ function SearchBar() {
     if (location.pathname === '/foods') {
       if (res.meals) {
         dispatch(setMealsAction(res.meals));
-        if (res.meals.length === 1) {
+        if (res.meals.length === 1) { // direcionamento para pagina de detalhes
           const id = res.meals[0].idMeal;
           history.push(`/foods/${id}`);
         }
@@ -28,7 +28,7 @@ function SearchBar() {
     } else if (location.pathname === '/drinks') {
       if (res.drinks) {
         dispatch(setDrinksAction(res.drinks));
-        if (res.drinks.length === 1) {
+        if (res.drinks.length === 1) { // direcionamento para pagina de detalhes
           const id = res.drinks[0].idDrink;
           history.push(`/drinks/${id}`);
         }

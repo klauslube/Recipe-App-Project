@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import store from './redux/store/index';
 import Foods from './pages/Foods';
 import Profile from './pages/Profile';
-// import Drinks from './pages/Drinks';
+import Drinks from './pages/Drinks';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/foods" component={ Foods } />
-          {/* <Route exact path="/drinks" component={ Drinks } /> */}
+          <Route exact path="/drinks" component={ Drinks } />
           {/* <Route exact path='/foods/{id-da-receita}' component={}/> */}
           {/* <Route exact path='/drinks/{id-da-receita}' component={}/> */}
           {/* <Route exact path='/foods/{id-da-receita}/in-progress' component={}/> */}

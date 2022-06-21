@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   drinks: [],
 };
 
-const foodAndDrinks = (state = INITIAL_STATE, action) => {
+const recipes = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case actionTypes.SET_MEALS_ACTION:
     return { ...state, meals: action.payload };
@@ -16,4 +16,4 @@ const foodAndDrinks = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default foodAndDrinks;
+export default recipes;
