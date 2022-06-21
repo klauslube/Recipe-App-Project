@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 
-class Profile extends Component {
-  render() {
-    return (
-      <Header />
-    );
-  }
+export default function Profile() {
+  const history = useHistory();
+  return (
+    <div>
+      <Header history={ history } />
+      <h1>Profile</h1>
+    </div>
+  );
 }
-
-export default connect()(Profile);
