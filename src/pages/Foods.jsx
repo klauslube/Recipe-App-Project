@@ -7,10 +7,8 @@ export default function Foods() {
   const history = useHistory();
   return (
     <>
-      <Header history={ history } />
-      <h1>Foods</h1>
+      <Header title="Foods" history={ history } search />
       <Footer />
     </>
-
   );
 }

@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 export default function ExploreFoods() {
   return (
     <div>
-      <Header />
+      <Header title="Explore Foods" />
       <h1>Explore Foods</h1>
       <Footer />
     </div>
