@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import RecipeCards from '../components/RecipeCards';
 import fetchApi from '../helpers/fetchApi';
 import { actionCreators } from '../redux/actions';
+import CategoriesList from '../components/CategoriesList';
 
 export default function Foods() {
   const { setMealsAction } = actionCreators;
@@ -18,6 +19,7 @@ export default function Foods() {
   return (
     <>
       <Header title="Foods" search />
+      <CategoriesList />
       <RecipeCards />
       <Footer />
     </>

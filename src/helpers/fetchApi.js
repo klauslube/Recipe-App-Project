@@ -1,14 +1,22 @@
 const mealBaseUrl = 'https://www.themealdb.com/api/json/v1/1/';
 const drinksBaseUrl = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-async function fetchApi(currentUrl, filterType, filter) {
+const INGREDIENTS = 0;
+const NAME = 1;
+const FIRST_LETTER = 2;
+const CATEGORIES_LIST = 3;
+const CATEGORIES_FILTER = 4;
+
+async function fetchApi(currentUrl, type, filter) {
   let baseUrl = '';
   if (currentUrl === '/foods') baseUrl = mealBaseUrl;
   else if (currentUrl === '/drinks') baseUrl = drinksBaseUrl;
 
-  if (filterType === 0) baseUrl += `filter.php?i=${filter}`;
-  else if (filterType === 1) baseUrl += `search.php?s=${filter}`;
-  else baseUrl += `search.php?f=${filter}`;
+  if (type === INGREDIENTS) baseUrl += `filter.php?i=${filter}`;
+  else if (type === NAME) baseUrl += `search.php?s=${filter}`;
+  else if (type === FIRST_LETTER) baseUrl += `search.php?f=${filter}`;
+  else if (type === CATEGORIES_LIST) baseUrl += `list.php?c=${filter}`;
+  else if (type === CATEGORIES_FILTER) baseUrl += `filter.php?c=${filter}`;
 
   const responseApi = await fetch(baseUrl);
   const response = await responseApi.json();
