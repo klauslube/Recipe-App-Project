@@ -1,4 +1,3 @@
-@ -0,0 +1,63 @@
 import React from 'react';
 import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -8,14 +7,14 @@ import App from '../App';
 import {
   VALID_EMAIL,
   VALID_PASSWORD,
-  INVALID_EMAIL,
-  INVALID_PASSWORD,
+  // INVALID_EMAIL,
+  // INVALID_PASSWORD,
 
 } from './constants';
 
-const initialState = {
+/* const initialState = {
   email: '',
-};
+}; */
 
 afterEach(() => jest.clearAllMocks());
 
@@ -51,14 +50,4 @@ describe('Teste se a página de Login funciona corretamente', () => {
     expect(enterButton).not.toBeDisabled();
     userEvent.click(enterButton);
   });
-  test('Se a chave mealsToken esta presente no local store', async () =>{
-    const mealsTokenSTO = 'mealsToken'
-    const localStorageItem = localStorage.getItem(mealsTokenSTO);
-    expect(localStorageItem).toBe(mealsTokenSTO);
-  });
-  test('Se a chave cocktailsToken esta presente no local store', async () =>{
-    const cocktailsTokenSTO = 'cocktailsToken'
-    const localStorageItem = localStorage.getItem('cocktailsToken');
-    expect(localStorageItem).toBe('cocktailsToken');
-  })
 });

@@ -3,8 +3,9 @@
 // export const PLAY_BTN_TEST_ID = 'btn-play';
 export const INVALID_USER = '';
 export const VALID_USER = 'rafhael';
+export const INVALID_PASSWORD = '242';
 export const VALID_EMAIL = 'alguem@email.com';
-export const INVALID_EMAIL_0 = 'email';
-export const INVALID_EMAIL_1 = 'email@com@';
+export const VALID_PASSWORD = '123';
+export const INVALID_EMAIL = 'email@com@';
 export const INVALID_EMAIL_2 = 'emailcom@';
 export const INVALID_EMAIL_3 = 'alguem@email.';
