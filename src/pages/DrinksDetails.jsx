@@ -1,6 +1,9 @@
 import React from 'react';
+// import fetchApi from '../helpers/fetchApi';
 
 export default function DrinksDetails() {
+  // const requestAPI = fetchApi('/');
+
   return (
     <div>
       <form>
@@ -12,24 +15,18 @@ export default function DrinksDetails() {
 
         <div>
           <p>Ingredients</p>
-          <div data-testid="${index}-ingredient-name-and-measure">
-
-          </div>
+          {/* <div data-testid="${index}-ingredient-name-and-measure" /> */}
         </div>
 
         <div>
           <p>Instructions</p>
-          <div data-testid="instructions" >
-
-          </div>
+          <div data-testid="instructions" />
         </div>
         <div>
           <p>Recommended</p>
-          <div data-testid="${index}-recomendation-card" >
-
-          </div>
+          {/* <div data-testid="${index}-recomendation-card" /> */}
         </div>
-        <button type='submit' data-testid="start-recipe-btn"></button>
+        {/* <button type="submit" data-testid="start-recipe-btn" /> */}
       </form>
     </div>
   );

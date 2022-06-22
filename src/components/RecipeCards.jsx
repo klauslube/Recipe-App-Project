@@ -24,30 +24,45 @@ function RecipeCards() {
     let recipes = [];
     if (urlLocation === '/foods') recipes = limitCards(meals);
     if (urlLocation === '/drinks') recipes = limitCards(drinks);
+
     setCards(recipes);
   }, [meals, drinks, urlLocation]);
+
+  const handleCardClick = ({ target }) => {
+    history.push(`${urlLocation}/${target.name}`);
+  };
 
   return (
     <section>
       { cards && cards.map((recipe, index) => {
         let recipeName = '';
         let recipeThumb = '';
+        let recipeId = '';
         if (urlLocation === '/foods') {
           recipeName = recipe.strMeal;
           recipeThumb = recipe.strMealThumb;
+          recipeId = recipe.idMeal;
         } else if (urlLocation === '/drinks') {
           recipeName = recipe.strDrink;
           recipeThumb = recipe.strDrinkThumb;
+          recipeId = recipe.idDrink;
         }
         return (
-          <div data-testid={ `${index}-recipe-card` } key={ `${index}-recipe-card` }>
+          <button
+            type="button"
+            data-testid={ `${index}-recipe-card` }
+            key={ `${index}-recipe-card` }
+            onClick={ handleCardClick }
+            name={ recipeId }
+          >
             <img
               data-testid={ `${index}-card-img` }
               alt={ recipeName }
               src={ recipeThumb }
+              name={ recipeId }
             />
-            <p data-testid={ `${index}-card-name` }>{ recipeName }</p>
-          </div>
+            <p data-testid={ `${index}-card-name` } name={ recipeId }>{ recipeName }</p>
+          </button>
         );
       }) }
     </section>
