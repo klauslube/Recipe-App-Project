@@ -6,6 +6,7 @@ const NAME = 1;
 const FIRST_LETTER = 2;
 const CATEGORIES_LIST = 3;
 const CATEGORIES_FILTER = 4;
+const DETAILS = 5;
 
 async function fetchApi(currentUrl, type, filter) {
   let baseUrl = '';
@@ -17,6 +18,7 @@ async function fetchApi(currentUrl, type, filter) {
   else if (type === FIRST_LETTER) baseUrl += `search.php?f=${filter}`;
   else if (type === CATEGORIES_LIST) baseUrl += `list.php?c=${filter}`;
   else if (type === CATEGORIES_FILTER) baseUrl += `filter.php?c=${filter}`;
+  else if (type === DETAILS) baseUrl += `lookup.php?i=${filter}`;
 
   const responseApi = await fetch(baseUrl);
   const response = await responseApi.json();
