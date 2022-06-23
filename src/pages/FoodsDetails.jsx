@@ -1,4 +1,4 @@
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
