@@ -1,3 +1,4 @@
+import Carousel from 'react-bootstrap/Carousel';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
@@ -6,18 +7,59 @@ export default function FoodsDetails() {
   const history = useHistory();
   const [useMeal, setMeal] = useState();
   const TYPE = 5;
+  const TYPE_NAME = 1;
+  const NUM3 = 3;
+  const NUM4 = 4;
+  const NUM5 = 5;
   const { location } = history;
   const { pathname } = location;
   const splitPathName = pathname.split('/');
-  const [useIngredient, setIngredient] = useState([]);
-  const [useMeasure, setMeasure] = useState([]);
+  const [useIngredient, setIngredient] = useState();
+  const [useMeasure, setMeasure] = useState();
+  const [useAllDrinks, setAllDrinks] = useState();
+  const MAX = 19;
+  const randomValue1 = Math.floor(Math.random() * MAX);
 
   useEffect(() => {
     fetchApi('/foods', TYPE, splitPathName[2])
       .then((res) => {
-        console.log(res); setMeal(res); setIngredient(Object.entries());
+        console.log(res.meals[0]);
+        setMeal(res);
+        setIngredient((Object.entries(res.meals[0])
+          .filter((key) => (key[0].includes('strIngredient') && key[1] !== ''))));
+        setMeasure((Object.entries(res.meals[0])
+          .filter((key) => (key[0].includes('strMeasure') && key[1] !== ''))));
+      });
+    fetchApi('/drinks', TYPE_NAME, '')
+      .then((res) => {
+        console.log(res);
+        setAllDrinks(res.drinks);
       });
   }, []);
+
+  const handleIngredients = () => {
+    const response = [];
+    if (useIngredient && useMeasure) {
+      useIngredient.forEach((key, index) => {
+        response.push(`${key[1]}-${useMeasure[index][1]}`);
+      });
+    }
+    return response;
+  };
+
+  const randomRecommended = () => {
+    const responseAll = [];
+    if (useAllDrinks) {
+      responseAll.push(useAllDrinks[randomValue1]);
+      responseAll.push(useAllDrinks[randomValue1 + 1]);
+      responseAll.push(useAllDrinks[randomValue1 + 2]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM3]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM4]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM5]);
+    }
+    console.log(responseAll);
+    return responseAll;
+  };
 
   return (
     <div>
@@ -32,16 +74,18 @@ export default function FoodsDetails() {
             <p data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
             <button type="button" data-testid="share-btn">compartilhar</button>
             <button type="button" data-testid="favorite-btn">favoritar</button>
-            <p data-testid="recipe-category">{useMeal.meals[0].strTags}</p>
+            <p data-testid="recipe-category">{useMeal.meals[0].strCategory}</p>
             <div>
               <p>Ingredients</p>
-              <div
-                data-testid={ `${useMeal.meals[0].idMeal}-ingredient-name-and-measure` }
-              />
-              {console.log(useIngredient.filter((key) => key[0]
-                .includes('strIngredient')
-                .filter((item) => item[1] !== '')
-                .map((ingredient) => ingredient[1])))}
+              {(handleIngredients()) && (handleIngredients())
+                .map((values, index) => (
+                  <p
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                    key={ index }
+                  >
+                    {values}
+                  </p>))}
+
             </div>
 
             <div>
@@ -60,7 +104,36 @@ export default function FoodsDetails() {
             </div>
             <div>
               <p>Recommended</p>
-              <div data-testid={ `${useMeal.meals[0].idMeal}-recomendation-card` } />
+              {(randomRecommended()) && (
+                <Carousel
+                  style={ { width: '100vw',
+                    backgroundColor: 'red',
+                    border: '1px solid black' } }
+                >
+
+                  {(randomRecommended())
+                    .map((card, index) => (
+                      <Carousel.Item
+                        style={ { width: '30%' } }
+                        className="carousel-item col-12 col-sm-6 col-md-4"
+                        key={ index }
+                        data-testid={ `${index}-recomendation-card` }
+                      >
+                        <img
+                          src={ card.strDrinkThumb }
+                          alt="recommeended drink"
+                        />
+                        <Carousel.Caption>
+                          <h3
+                            data-testid={ `${index}-recomendation-title` }
+                          >
+                            {card.strDrink}
+                          </h3>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                    )) }
+                </Carousel>)}
+
             </div>
             <button type="submit" data-testid="start-recipe-btn">Start Recipe</button>
           </div>)}
@@ -68,12 +141,3 @@ export default function FoodsDetails() {
     </div>
   );
 }
-
-// if (key.includes('strIngredient')) {
-//   const keyNumber = key[0].split('ent');
-//   const measure = useIngredient
-//     .find((element) => keyNumber === element[0].split('ure'));
-//   key = key[1] + measure[1];
-//   return key;
-// }
-// return key;
