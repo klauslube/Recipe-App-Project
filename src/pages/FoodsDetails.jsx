@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 import '../App.css';
+import { getFinished } from '../helpers/manageLocalStorage';
+import HandleBtn from '../components/HandleBtn';
 
 export default function FoodsDetails() {
   const history = useHistory();
@@ -48,10 +50,10 @@ export default function FoodsDetails() {
     return response;
   };
 
-  const handleRecipeBtn = (event) => {
-    event.preventDefault();
-    history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
-  };
+  // const handleRecipeBtn = (event) => {
+  //   event.preventDefault();
+  //   history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
+  // };
 
   const randomRecommended = () => {
     const responseAll = [];
@@ -134,15 +136,19 @@ export default function FoodsDetails() {
                   ))
               )}
             </div>
-            <button
-              className="startRecipe-btn"
-              type="submit"
-              data-testid="start-recipe-btn"
-              onClick={ handleRecipeBtn }
-            >
-              Start Recipe
+            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn />}
+            {/*
+            //   <button
+            //     className="startRecipe-btn"
+            //     type="submit"
+            //     data-testid="start-recipe-btn"
+            //     onClick={ handleRecipeBtn }
+            //   >
+            //     {getInProgressList('/foods', useMeal.meals[0].idMeal)
+            //       ? 'Continue Recipe' : 'Start Recipe'}
+            //   </button>
+            // ) } */}
 
-            </button>
           </div>)}
       </form>
     </div>

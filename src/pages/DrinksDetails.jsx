@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 import '../App.css';
+// import { getFinished, getInProgressList } from '../helpers/manageLocalStorage';
 
 export default function DrinksDetails() {
   const history = useHistory();
@@ -54,10 +55,10 @@ export default function DrinksDetails() {
     return response;
   };
 
-  const handleRecipeBtn = (event) => {
-    event.preventDefault();
-    history.push(`/drinks/${useDrink.drinks[0].idDrink}/in-progress`);
-  };
+  // const handleRecipeBtn = (event) => {
+  //   event.preventDefault();
+  //   history.push(`/drinks/${useDrink.drinks[0].idDrink}/in-progress`);
+  // };
 
   const randomRecommended = () => {
     const responseAll = [];
@@ -130,15 +131,19 @@ export default function DrinksDetails() {
                   ))
               )}
             </div>
-            <button
-              className="startRecipe-btn"
-              type="submit"
-              data-testid="start-recipe-btn"
-              onClick={ handleRecipeBtn }
-            >
-              Start Recipe
+            {/* {!getFinished(useDrink.drinks[0].idMeal) && (
 
-            </button>
+              <button
+                className="startRecipe-btn"
+                type="submit"
+                data-testid="start-recipe-btn"
+                onClick={ handleRecipeBtn }
+              >
+                {getInProgressList('/drinks', useDrink.drinks[0].idDrink)
+                  ? 'Continue Recipe' : 'Start Recipe'}
+
+              </button>
+            ) } */}
           </div>)}
       </form>
     </div>

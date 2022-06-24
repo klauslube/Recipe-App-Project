@@ -10,6 +10,7 @@ function CategoriesList() {
   const { location } = history;
   const [categories, setCategories] = useState([]);
   const [lastFilter, setFilter] = useState('');
+  const { setMealsAction, setDrinksAction } = actionCreators;
 
   const url = location.pathname;
   const NAME = 1;
@@ -30,17 +31,25 @@ function CategoriesList() {
     });
   }, [url]);
 
+  const dispatchFilter = async (response, filter) => {
+    if (url === '/foods') dispatch(setMealsAction(response.meals));
+    else if (url === '/drinks') dispatch(setDrinksAction(response.drinks));
+    setFilter(filter);
+  };
+
+  const resetFilter = async () => {
+    const response = await fetchApi(url, NAME, '');
+    dispatchFilter(response, '');
+  };
+
   const handleSelectCategory = async ({ target }) => {
-    const { setMealsAction, setDrinksAction } = actionCreators;
     const filter = target.id;
     let response;
 
     if (filter === lastFilter) response = await fetchApi(url, NAME, '');
     else response = await fetchApi(url, CATEGORIES_FILTER, filter);
 
-    if (url === '/foods') dispatch(setMealsAction(response.meals));
-    else if (url === '/drinks') dispatch(setDrinksAction(response.drinks));
-    setFilter(filter);
+    dispatchFilter(response, filter);
   };
 
   return (
@@ -56,6 +65,13 @@ function CategoriesList() {
           { item.strCategory }
         </button>
       )) }
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ resetFilter }
+      >
+        All
+      </button>
     </div>
   );
 }
