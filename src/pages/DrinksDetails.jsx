@@ -35,7 +35,16 @@ export default function DrinksDetails() {
           <p>Recommended</p>
           {/* <div data-testid="${index}-recomendation-card" /> */}
         </div>
-        {/* <button type="submit" data-testid="start-recipe-btn" /> */}
+        <button
+          className="startRecipe-btn"
+          type="submit"
+          data-testid="start-recipe-btn"
+          // onClick={ () => history.push(
+          //   `/foods/${useMeal.meals[0].idDrinks}/in-progress`,
+          // ) }
+        >
+          Start Recipe
+        </button>
       </form>
     </div>
   );

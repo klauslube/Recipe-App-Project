@@ -1,4 +1,4 @@
-import Carousel from 'bootstrap';
+// import Carousel from 'bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
@@ -47,19 +47,19 @@ export default function FoodsDetails() {
     return response;
   };
 
-  const randomRecommended = () => {
-    const responseAll = [];
-    if (useAllDrinks) {
-      responseAll.push(useAllDrinks[randomValue1]);
-      responseAll.push(useAllDrinks[randomValue1 + 1]);
-      responseAll.push(useAllDrinks[randomValue1 + 2]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM3]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM4]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM5]);
-    }
-    console.log(responseAll);
-    return responseAll;
-  };
+  // const randomRecommended = () => {
+  //   const responseAll = [];
+  //   if (useAllDrinks) {
+  //     responseAll.push(useAllDrinks[randomValue1]);
+  //     responseAll.push(useAllDrinks[randomValue1 + 1]);
+  //     responseAll.push(useAllDrinks[randomValue1 + 2]);
+  //     responseAll.push(useAllDrinks[randomValue1 + NUM3]);
+  //     responseAll.push(useAllDrinks[randomValue1 + NUM4]);
+  //     responseAll.push(useAllDrinks[randomValue1 + NUM5]);
+  //   }
+  //   console.log(responseAll);
+  //   return responseAll;
+  // };
 
   return (
     <div>
@@ -104,7 +104,8 @@ export default function FoodsDetails() {
             </div>
             <div>
               <p>Recommended</p>
-              {(randomRecommended()) && (
+              {/* {(randomRecommended()) } */}
+              {/* && (
                 <Carousel
                   style={ { width: '100vw',
                     backgroundColor: 'red',
@@ -132,10 +133,20 @@ export default function FoodsDetails() {
                         </Carousel.Caption>
                       </Carousel.Item>
                     )) }
-                </Carousel>)}
+                </Carousel>)} */}
 
             </div>
-            <button type="submit" data-testid="start-recipe-btn">Start Recipe</button>
+            <button
+              className="startRecipe-btn"
+              type="submit"
+              data-testid="start-recipe-btn"
+              onClick={ () => history.push(
+                `/foods/${useMeal.meals[0].idMeal}/in-progress`,
+              ) }
+            >
+              Start Recipe
+
+            </button>
           </div>)}
       </form>
     </div>
