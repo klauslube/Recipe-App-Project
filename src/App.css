@@ -38,7 +38,7 @@
 }
 
 .startRecipe-btn {
-  position: relative;
+  position: fixed;
   bottom: 0;
 }
 
@@ -74,10 +74,11 @@
 
 div.scrollmenu {
   display : flex;
-  background-color: #333;
+  /* background-color: #333; */
   overflow: auto;
   white-space: nowrap;
   width: 100vh;
+  /* height: 50vh; */
 }
 
 div.scrollmenu div {

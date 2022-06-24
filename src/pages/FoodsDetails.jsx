@@ -119,7 +119,7 @@ export default function FoodsDetails() {
                     >
 
                       <img
-                        style={ { width: '30vw' } }
+                        style={ { width: '200px' } }
                         src={ card.strDrinkThumb }
                         alt="recommeended drink"
                       />
