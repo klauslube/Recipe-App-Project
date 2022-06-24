@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
+import '../App.css';
 
 export default function FoodsDetails() {
   const history = useHistory();
@@ -107,7 +108,7 @@ export default function FoodsDetails() {
                 <track kind="captions" />
               </video>
             </div>
-            <div>
+            <div className="scrollmenu">
               <p>Recommended</p>
               {(randomRecommended()) && (
                 randomRecommended()
@@ -116,7 +117,9 @@ export default function FoodsDetails() {
                       key={ index }
                       data-testid={ `${index}-recomendation-card` }
                     >
+
                       <img
+                        style={ { width: '30vw' } }
                         src={ card.strDrinkThumb }
                         alt="recommeended drink"
                       />
@@ -126,6 +129,7 @@ export default function FoodsDetails() {
                       >
                         {card.strDrink}
                       </h3>
+
                     </div>
                   ))
               )}
