@@ -38,7 +38,7 @@
 }
 
 .startRecipe-btn {
-  position: fixed;
+  position: relative;
   bottom: 0;
 }
 

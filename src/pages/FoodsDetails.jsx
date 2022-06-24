@@ -7,6 +7,7 @@ export default function FoodsDetails() {
   const [useMeal, setMeal] = useState();
   const TYPE = 5;
   const TYPE_NAME = 1;
+  const NUM2 = 2;
   const NUM3 = 3;
   const NUM4 = 4;
   const NUM5 = 5;
@@ -16,6 +17,8 @@ export default function FoodsDetails() {
   const [useIngredient, setIngredient] = useState();
   const [useMeasure, setMeasure] = useState();
   const [useAllDrinks, setAllDrinks] = useState();
+  const [useCarousel, setCarousel] = useState(0);
+
   const MAX = 19;
   const randomValue1 = Math.floor(Math.random() * MAX);
 
@@ -51,8 +54,8 @@ export default function FoodsDetails() {
     history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
   };
 
+  const responseAll = [];
   const randomRecommended = () => {
-    const responseAll = [];
     if (useAllDrinks) {
       responseAll.push(useAllDrinks[randomValue1]);
       responseAll.push(useAllDrinks[randomValue1 + 1]);
@@ -65,6 +68,10 @@ export default function FoodsDetails() {
     return responseAll;
   };
 
+  const handleClick = () => {
+    responseAll.slice(0, 1);
+    setCarousel(responseAll);
+  };
   return (
     <div>
       <form>
@@ -109,26 +116,32 @@ export default function FoodsDetails() {
             <div>
               <p>Recommended</p>
               {(randomRecommended()) && (
-                randomRecommended().forEach((card, index) => (
-
-                  <div
-                    key={ index }
-                    data-testid={ `${index}-recomendation-card` }
-                  >
-                    <img
-                      src={ card.strDrinkThumb }
-                      alt="recommeended drink"
-                    />
-
-                    <h3
-                      data-testid={ `${index}-recomendation-title` }
+                randomRecommended()
+                  .map((card, index) => (
+                    <div
+                      key={ index }
+                      data-testid={ `${index}-recomendation-card` }
                     >
-                      {card.strDrink}
-                    </h3>
+                      <img
+                        src={ card.strDrinkThumb }
+                        alt="recommeended drink"
+                      />
 
-                  </div>
-                ))
-              )}
+                      <h3
+                        data-testid={ `${index}-recomendation-title` }
+                      >
+                        {card.strDrink}
+                      </h3>
+                    </div>
+                  ))
+              ).slice(0, NUM2)}
+              <button
+                onClick={ handleClick }
+                type="button"
+              >
+                Next
+
+              </button>
             </div>
             <button
               className="startRecipe-btn"
