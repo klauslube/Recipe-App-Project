@@ -7,6 +7,7 @@ import {
   getInProgressList,
   setFavoriteRecipe,
   getFavoriteRecipe,
+  setDoneRecipe,
 } from '../helpers/manageLocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -99,6 +100,24 @@ export default function DrinksProgress() {
   };
 
   const handleFinish = () => {
+    let tags = [];
+    if (
+      recipe.strTags !== null && recipe.strTags.includes(',')
+    ) tags = recipe.strTags.split(', ');
+    else if (recipe.strTags !== null) tags = [recipe.strTags];
+    console.log(tags);
+    const doneRecipe = {
+      id,
+      type: 'drink',
+      nationality: '',
+      category: recipe.strCategory,
+      alcoholicOrNot: recipe.strAlcoholic,
+      name: recipe.strDrink,
+      image: recipe.strDrinkThumb,
+      doneDate: Date.now(),
+      tags,
+    };
+    setDoneRecipe(doneRecipe, 'Add');
     history.push('/done-recipes');
   };
 
