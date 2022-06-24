@@ -109,25 +109,26 @@ export default function FoodsDetails() {
             <div>
               <p>Recommended</p>
               {(randomRecommended()) && (
-                randomRecommended().forEach((card, index) => (
+                randomRecommended()
+                  .map((card, index) => (
 
-                  <div
-                    key={ index }
-                    data-testid={ `${index}-recomendation-card` }
-                  >
-                    <img
-                      src={ card.strDrinkThumb }
-                      alt="recommeended drink"
-                    />
-
-                    <h3
-                      data-testid={ `${index}-recomendation-title` }
+                    <div
+                      key={ index }
+                      data-testid={ `${index}-recomendation-card` }
                     >
-                      {card.strDrink}
-                    </h3>
+                      <img
+                        src={ card.strDrinkThumb }
+                        alt="recommeended drink"
+                      />
 
-                  </div>
-                ))
+                      <h3
+                        data-testid={ `${index}-recomendation-title` }
+                      >
+                        {card.strDrink}
+                      </h3>
+
+                    </div>
+                  ))
               )}
             </div>
             <button
