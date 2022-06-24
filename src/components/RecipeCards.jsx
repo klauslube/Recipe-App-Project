@@ -29,8 +29,7 @@ function RecipeCards() {
   }, [meals, drinks, urlLocation]);
 
   const handleCardClick = ({ target }) => {
-    // history.push(`${urlLocation}/${target.name}`);
-    history.push(`${urlLocation}/${target.name}/in-progress`);
+    history.push(`${urlLocation}/${target.name}`);
   };
 
   return (

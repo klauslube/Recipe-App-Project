@@ -38,3 +38,28 @@ export function getInProgressList(url, id) {
   const inProgressList = JSON.parse(localStorage.getItem('inProgressRecipes'));
   return inProgressList[type][id];
 }
+
+export function setFavoriteRecipe(recipe, op) {
+  if (!localStorage.getItem('favoriteRecipes')) {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
+  const savedList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const oldList = savedList.filter((item) => item.id !== recipe.id);
+  let newList = [];
+  if (op === 'Add') {
+    if (oldList) newList = [...oldList, recipe];
+    else newList = [recipe];
+  } else if (op === 'Remove') newList = oldList;
+  localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+}
+
+export function getFavoriteRecipe(id) {
+  if (!localStorage.getItem('favoriteRecipes')) {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+  const savedList = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const response = savedList.find((item) => item.id === id);
+  if (!response) return undefined;
+  return response;
+}

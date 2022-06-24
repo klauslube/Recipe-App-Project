@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 import '../styles/RecipeProgress.css';
-import { updateInProgress, getInProgressList } from '../helpers/manageLocalStorage';
+import {
+  updateInProgress,
+  getInProgressList,
+  setFavoriteRecipe,
+  getFavoriteRecipe,
+} from '../helpers/manageLocalStorage';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 export default function DrinksProgress() {
   const history = useHistory();
   const { location: { pathname } } = history;
   const [recipe, setRecipe] = useState();
   const [ingredients, setIngredient] = useState();
+  const [isFavorite, verifyIsFavorite] = useState();
   const TYPE = 5; // fetchApi
 
   const id = (pathname.split('/'))[2];
@@ -33,6 +42,8 @@ export default function DrinksProgress() {
       defineIngredients(Object.entries(res.meals[0]));
       setRecipe(res.meals[0]);
     });
+    if (getFavoriteRecipe(id)) verifyIsFavorite(blackHeartIcon);
+    else verifyIsFavorite(whiteHeartIcon);
   }, [id, url]);
 
   const handleCheck = ({ target }) => {
@@ -53,6 +64,44 @@ export default function DrinksProgress() {
     return checkIngredient.progress;
   };
 
+  const handleShareBtn = ({ target }) => {
+    const urlBase = ((window.location.href).split('/in-progress'))[0];
+    navigator.clipboard.writeText(urlBase);
+    target.textContent = 'Link copied!';
+  };
+
+  const handleSaveBtn = () => {
+    const saveRecipe = {
+      id,
+      type: 'food',
+      nationality: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    };
+    if (!getFavoriteRecipe(id)) {
+      setFavoriteRecipe(saveRecipe, 'Add');
+      verifyIsFavorite(blackHeartIcon);
+    } else {
+      setFavoriteRecipe(saveRecipe, 'Remove');
+      verifyIsFavorite(whiteHeartIcon);
+    }
+  };
+
+  const verifyAllIngredients = () => {
+    let cont = 0;
+    ingredients.forEach((ing) => {
+      if (verifyProgress(ing)) cont += 1;
+    });
+    if (cont === ingredients.length) return false;
+    return true;
+  };
+
+  const handleFinish = () => {
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
       <h1>Foods Progress</h1>
@@ -67,18 +116,28 @@ export default function DrinksProgress() {
             <h3 data-testid="recipe-title">
               { recipe.strMeal }
             </h3>
-            <button
-              type="button"
-              data-testid="share-btn"
-            >
+            <label htmlFor="share_btn">
+              <input
+                type="image"
+                src={ shareIcon }
+                data-testid="share-btn"
+                onClick={ handleShareBtn }
+                id="share_btn"
+                alt="share"
+              />
               Share
-            </button>
-            <button
-              type="button"
-              data-testid="favorite-btn"
-            >
+            </label>
+            <label htmlFor="save_btn">
+              <input
+                type="image"
+                src={ isFavorite }
+                onClick={ handleSaveBtn }
+                id="save_btn"
+                alt="save"
+                data-testid="favorite-btn"
+              />
               Save
-            </button>
+            </label>
             <p data-testid="recipe-category">
               { recipe.strCategory }
             </p>
@@ -108,6 +167,8 @@ export default function DrinksProgress() {
           <button
             type="button"
             data-testid="finish-recipe-btn"
+            disabled={ verifyAllIngredients() }
+            onClick={ handleFinish }
           >
             Finish
           </button>
