@@ -1,4 +1,3 @@
-// import Carousel from 'bootstrap';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
@@ -47,19 +46,24 @@ export default function FoodsDetails() {
     return response;
   };
 
-  // const randomRecommended = () => {
-  //   const responseAll = [];
-  //   if (useAllDrinks) {
-  //     responseAll.push(useAllDrinks[randomValue1]);
-  //     responseAll.push(useAllDrinks[randomValue1 + 1]);
-  //     responseAll.push(useAllDrinks[randomValue1 + 2]);
-  //     responseAll.push(useAllDrinks[randomValue1 + NUM3]);
-  //     responseAll.push(useAllDrinks[randomValue1 + NUM4]);
-  //     responseAll.push(useAllDrinks[randomValue1 + NUM5]);
-  //   }
-  //   console.log(responseAll);
-  //   return responseAll;
-  // };
+  const handleRecipeBtn = (event) => {
+    event.preventDefault();
+    history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
+  };
+
+  const randomRecommended = () => {
+    const responseAll = [];
+    if (useAllDrinks) {
+      responseAll.push(useAllDrinks[randomValue1]);
+      responseAll.push(useAllDrinks[randomValue1 + 1]);
+      responseAll.push(useAllDrinks[randomValue1 + 2]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM3]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM4]);
+      responseAll.push(useAllDrinks[randomValue1 + NUM5]);
+    }
+    console.log(responseAll);
+    return responseAll;
+  };
 
   return (
     <div>
@@ -104,45 +108,33 @@ export default function FoodsDetails() {
             </div>
             <div>
               <p>Recommended</p>
-              {/* {(randomRecommended()) } */}
-              {/* && (
-                <Carousel
-                  style={ { width: '100vw',
-                    backgroundColor: 'red',
-                    border: '1px solid black' } }
-                >
+              {(randomRecommended()) && (
+                randomRecommended().forEach((card, index) => (
 
-                  {(randomRecommended())
-                    .map((card, index) => (
-                      <Carousel.Item
-                        style={ { width: '30%' } }
-                        className="carousel-item col-12 col-sm-6 col-md-4"
-                        key={ index }
-                        data-testid={ `${index}-recomendation-card` }
-                      >
-                        <img
-                          src={ card.strDrinkThumb }
-                          alt="recommeended drink"
-                        />
-                        <Carousel.Caption>
-                          <h3
-                            data-testid={ `${index}-recomendation-title` }
-                          >
-                            {card.strDrink}
-                          </h3>
-                        </Carousel.Caption>
-                      </Carousel.Item>
-                    )) }
-                </Carousel>)} */}
+                  <div
+                    key={ index }
+                    data-testid={ `${index}-recomendation-card` }
+                  >
+                    <img
+                      src={ card.strDrinkThumb }
+                      alt="recommeended drink"
+                    />
 
+                    <h3
+                      data-testid={ `${index}-recomendation-title` }
+                    >
+                      {card.strDrink}
+                    </h3>
+
+                  </div>
+                ))
+              )}
             </div>
             <button
               className="startRecipe-btn"
               type="submit"
               data-testid="start-recipe-btn"
-              onClick={ () => history.push(
-                `/foods/${useMeal.meals[0].idMeal}/in-progress`,
-              ) }
+              onClick={ handleRecipeBtn }
             >
               Start Recipe
 
