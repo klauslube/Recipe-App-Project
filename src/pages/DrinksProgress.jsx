@@ -8,6 +8,7 @@ import {
   setFavoriteRecipe,
   getFavoriteRecipe,
   setDoneRecipe,
+  removeInProgress,
 } from '../helpers/manageLocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -103,9 +104,10 @@ export default function DrinksProgress() {
     let tags = [];
     if (
       recipe.strTags !== null && recipe.strTags.includes(',')
-    ) tags = recipe.strTags.split(', ');
-    else if (recipe.strTags !== null) tags = [recipe.strTags];
-    console.log(tags);
+    ) {
+      tags = recipe.strTags.split(', ');
+      tags = [tags[0], tags[1]];
+    } else if (recipe.strTags !== null) tags = [recipe.strTags];
     const doneRecipe = {
       id,
       type: 'drink',
@@ -118,6 +120,7 @@ export default function DrinksProgress() {
       tags,
     };
     setDoneRecipe(doneRecipe, 'Add');
+    removeInProgress(url, id);
     history.push('/done-recipes');
   };
 

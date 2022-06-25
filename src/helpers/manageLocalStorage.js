@@ -39,18 +39,24 @@ export function getInProgressList(url, id) {
   return inProgressList[type][id];
 }
 
-// export function removeInProgress(url, id) {
-//   let type = '';
-//   if (url === '/foods') type = 'meals';
-//   if (url === '/drinks') type = 'cocktails';
+export function removeInProgress(url, id) {
+  let type = '';
+  if (url === '/foods') type = 'meals';
+  if (url === '/drinks') type = 'cocktails';
 
-//   const inProgressList = JSON.parse(localStorage.getItem('inProgressRecipes'));
-//   const oldList = Object.entries(inProgressList[type]);
-//   const newList = oldList.filter((item) => item[0] !== id);
-//   inProgressList[type] = newList;
-//   console.log(inProgressList);
-//   // localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressList));
-// }
+  const inProgressList = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const newList = Object.entries(inProgressList[type])
+    .filter((item) => item[0] !== id);
+
+  if (newList) { // remove a receita do local storage
+    inProgressList[type] = newList.reduce((acc, recipe) => ({
+      ...acc,
+      [recipe[0]]: recipe[1],
+    }), {});
+  } else inProgressList[type] = {};
+
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressList));
+}
 
 export function setFavoriteRecipe(recipe, op) {
   if (!localStorage.getItem('favoriteRecipes')) {
