@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Header from '../components/Header';
 import { getDoneRecipes } from '../helpers/manageLocalStorage';
 import shareIcon from '../images/shareIcon.svg';
 
@@ -32,6 +33,7 @@ export default function DoneRecipes() {
 
   return (
     <div>
+      <Header title="Done Recipes" />
       <h3>Done Recipes</h3>
       <div>
         <button
