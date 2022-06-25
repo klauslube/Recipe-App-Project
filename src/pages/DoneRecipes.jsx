@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
+import ShareBtn from '../components/ShareBtn';
 import { getDoneRecipes } from '../helpers/manageLocalStorage';
-import shareIcon from '../images/shareIcon.svg';
 
 export default function DoneRecipes() {
   const [cards, setCards] = useState([]);
@@ -13,13 +13,6 @@ export default function DoneRecipes() {
     setCards(getDoneRecipes());
     setAllCards(getDoneRecipes());
   }, []);
-
-  const handleShareBtn = ({ target }, type, id) => {
-    const urlBase = ((window.location.href).split('/done-recipes'))[0];
-    if (type === 'food') navigator.clipboard.writeText(`${urlBase}/foods/${id}`);
-    else navigator.clipboard.writeText(`${urlBase}/foods/${id}`);
-    target.textContent = 'Link copied!';
-  };
 
   const handleFilter = ({ target }) => {
     if (target.name === 'all') setCards(allCards);
@@ -86,17 +79,11 @@ export default function DoneRecipes() {
               ) : card.alcoholicOrNot }
             </p>
             <p data-testid={ `${index}-horizontal-done-date` }>{ card.doneDate }</p>
-            <label htmlFor="share_btn">
-              <input
-                type="image"
-                src={ shareIcon }
-                data-testid={ `${index}-horizontal-share-btn` }
-                onClick={ (e) => handleShareBtn(e, card.type, card.id) }
-                id="share_btn"
-                alt="share"
-              />
-              Share
-            </label>
+            <ShareBtn
+              url={ card.type === 'food' ? '/foods' : '/drinks' }
+              recipeId={ card.id }
+              dataTestId={ `${index}-horizontal-share-btn` }
+            />
             { (card.tags.length > 0) && card.tags.map((tag) => (
               <p
                 key={ tag }

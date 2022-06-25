@@ -5,21 +5,17 @@ import '../styles/RecipeProgress.css';
 import {
   updateInProgress,
   getInProgressList,
-  setFavoriteRecipe,
-  getFavoriteRecipe,
   setDoneRecipe,
   removeInProgress,
 } from '../helpers/manageLocalStorage';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import FavoriteBtn from '../components/FavoriteBtn';
+import ShareBtn from '../components/ShareBtn';
 
 export default function DrinksProgress() {
   const history = useHistory();
   const { location: { pathname } } = history;
   const [recipe, setRecipe] = useState();
   const [ingredients, setIngredient] = useState();
-  const [isFavorite, verifyIsFavorite] = useState();
   const TYPE = 5; // fetchApi
 
   const id = (pathname.split('/'))[2];
@@ -44,8 +40,6 @@ export default function DrinksProgress() {
       defineIngredients(Object.entries(res.meals[0]));
       setRecipe(res.meals[0]);
     });
-    if (getFavoriteRecipe(id)) verifyIsFavorite(blackHeartIcon);
-    else verifyIsFavorite(whiteHeartIcon);
   }, [id, url]);
 
   const handleCheck = ({ target }) => {
@@ -64,31 +58,6 @@ export default function DrinksProgress() {
     const checkIngredient = ingredientsProgres.find((elem) => elem.item === ing);
     if (!checkIngredient) return false;
     return checkIngredient.progress;
-  };
-
-  const handleShareBtn = ({ target }) => {
-    const urlBase = ((window.location.href).split('/in-progress'))[0];
-    navigator.clipboard.writeText(urlBase);
-    target.textContent = 'Link copied!';
-  };
-
-  const handleSaveBtn = () => {
-    const saveRecipe = {
-      id,
-      type: 'food',
-      nationality: recipe.strArea,
-      category: recipe.strCategory,
-      alcoholicOrNot: '',
-      name: recipe.strMeal,
-      image: recipe.strMealThumb,
-    };
-    if (!getFavoriteRecipe(id)) {
-      setFavoriteRecipe(saveRecipe, 'Add');
-      verifyIsFavorite(blackHeartIcon);
-    } else {
-      setFavoriteRecipe(saveRecipe, 'Remove');
-      verifyIsFavorite(whiteHeartIcon);
-    }
   };
 
   const verifyAllIngredients = () => {
@@ -136,28 +105,8 @@ export default function DrinksProgress() {
             <h3 data-testid="recipe-title">
               { recipe.strMeal }
             </h3>
-            <label htmlFor="share_btn">
-              <input
-                type="image"
-                src={ shareIcon }
-                data-testid="share-btn"
-                onClick={ handleShareBtn }
-                id="share_btn"
-                alt="share"
-              />
-              Share
-            </label>
-            <label htmlFor="save_btn">
-              <input
-                type="image"
-                src={ isFavorite }
-                onClick={ handleSaveBtn }
-                id="save_btn"
-                alt="save"
-                data-testid="favorite-btn"
-              />
-              Save
-            </label>
+            <ShareBtn url="/foods" recipeId={ recipe.idMeal } dataTestId="share-btn" />
+            <FavoriteBtn recipe={ recipe } url="/foods" dataTestId="favorite-btn" />
             <p data-testid="recipe-category">
               { recipe.strCategory }
             </p>
