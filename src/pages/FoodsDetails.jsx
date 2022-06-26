@@ -4,6 +4,8 @@ import fetchApi from '../helpers/fetchApi';
 import '../App.css';
 import { getFinished } from '../helpers/manageLocalStorage';
 import HandleBtn from '../components/HandleBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
+import ShareBtn from '../components/ShareBtn';
 
 export default function FoodsDetails() {
   const history = useHistory();
@@ -80,8 +82,16 @@ export default function FoodsDetails() {
               alt="recipe-img"
             />
             <p data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
-            <button type="button" data-testid="share-btn">compartilhar</button>
-            <button type="button" data-testid="favorite-btn">favoritar</button>
+            <ShareBtn
+              recipeId={ useMeal.meals[0].idMeal }
+              url="/foods"
+              dataTestId="share-btn"
+            />
+            <FavoriteBtn
+              recipe={ useMeal.meals[0] }
+              url="/drinks"
+              dataTestId="share-btn"
+            />
             <p data-testid="recipe-category">{useMeal.meals[0].strCategory}</p>
             <div>
               <p>Ingredients</p>
@@ -136,7 +146,7 @@ export default function FoodsDetails() {
                   ))
               )}
             </div>
-            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn />}
+            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn url="/foods" />}
             {/*
             //   <button
             //     className="startRecipe-btn"
