@@ -83,7 +83,7 @@ div.scrollmenu {
 
 div.scrollmenu div {
   color: white;
-  width: 50%;
+  width: 60%;
   text-align: center;
   padding: 20px;
   text-decoration: none;
@@ -91,4 +91,8 @@ div.scrollmenu div {
 
 div.scrollmenu div:hover {
   background-color: #777;
+}
+
+.heading-recomendation {
+  color: black;
 }

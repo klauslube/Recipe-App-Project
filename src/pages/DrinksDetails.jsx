@@ -4,17 +4,17 @@ import fetchApi from '../helpers/fetchApi';
 import '../App.css';
 import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
-// import HandleBtn from '../components/HandleBtn';
-// import { getFinished, getInProgressList } from '../helpers/manageLocalStorage';
+import HandleBtn from '../components/HandleBtn';
+import { getFinished } from '../helpers/manageLocalStorage';
 
 export default function DrinksDetails() {
   const history = useHistory();
   const [useDrink, setDrink] = useState();
   const TYPE = 5;
   const TYPE_NAME = 1;
-  const NUM3 = 3;
-  const NUM4 = 4;
-  const NUM5 = 5;
+  // const NUM3 = 3;
+  // const NUM4 = 4;
+  // const NUM5 = 5;
   const { location } = history;
   const { pathname } = location;
   const splitPathName = pathname.split('/');
@@ -22,8 +22,8 @@ export default function DrinksDetails() {
   const [useMeasure, setMeasure] = useState();
   const [useAllMeals, setAllMeals] = useState();
 
-  const MAX = 19;
-  const randomValue1 = Math.floor(Math.random() * MAX);
+  // const MAX = 19;
+  // const randomValue1 = Math.floor(Math.random() * MAX);
 
   useEffect(() => {
     fetchApi('/drinks', TYPE, splitPathName[2])
@@ -66,12 +66,12 @@ export default function DrinksDetails() {
   const randomRecommended = () => {
     const responseAll = [];
     if (useAllMeals) {
-      responseAll.push(useAllMeals[randomValue1]);
-      responseAll.push(useAllMeals[randomValue1 + 1]);
-      responseAll.push(useAllMeals[randomValue1 + 2]);
-      responseAll.push(useAllMeals[randomValue1 + NUM3]);
-      responseAll.push(useAllMeals[randomValue1 + NUM4]);
-      responseAll.push(useAllMeals[randomValue1 + NUM5]);
+      responseAll.push(useAllMeals[0]);
+      responseAll.push(useAllMeals[1]);
+      responseAll.push(useAllMeals[2]);
+      responseAll.push(useAllMeals[3]);
+      responseAll.push(useAllMeals[4]);
+      responseAll.push(useAllMeals[5]);
     }
     console.log(responseAll);
     return responseAll;
@@ -142,10 +142,10 @@ export default function DrinksDetails() {
                   ))
               )}
             </div>
-            {/* {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn
+            {!getFinished(useDrink.drinks[0].idDrink) && <HandleBtn
               url="/drinks"
               drinks={ useDrink.drinks[0] }
-            />} */}
+            />}
             {/* {!getFinished(useDrink.drinks[0].idMeal) && (
 
               <button

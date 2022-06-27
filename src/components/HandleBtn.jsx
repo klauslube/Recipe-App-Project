@@ -6,8 +6,8 @@ import { getInProgressList } from '../helpers/manageLocalStorage';
 
 export default function HandleBtn(props) {
   const history = useHistory();
-  const [useMeal, setMeal] = useState();
-  const [useDrink, setDrink] = useState();
+  const [useMeal, setMeal] = useState([]);
+  const [useDrink, setDrink] = useState([]);
   // const { location } = history;
   // const { pathname } = location;
   // const TYPE = 5;
@@ -22,15 +22,15 @@ export default function HandleBtn(props) {
   //   //       setMeal(res);
   //   //     } else setDrink(res);
   //   //   });
-    console.log(meals, drinks);
+    // console.log(meals, drinks);
     if (meals) setMeal(meals);
     if (drinks) setDrink(drinks);
   }, []);
 
   const handleRecipeBtn = (event) => {
     event.preventDefault();
-    if (url === '/foods') history.push(`${url}${meals.idMeal}/in-progress`);
-    else history.push(`${url}${drinks.idDrink}/in-progress`);
+    if (url === '/foods') history.push(`${url}/${meals.idMeal}/in-progress`);
+    else history.push(`${url}/${drinks.idDrink}/in-progress`);
   };
 
   const handleId = () => {
@@ -45,19 +45,18 @@ export default function HandleBtn(props) {
     }
   };
 
+  console.log(useMeal);
   return (
-    (useMeal[0] || useDrink[0])
-
-      && (
-        <button
-          className="startRecipe-btn"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ handleRecipeBtn }
-        >
-          {getInProgressList(url, handleId())
-            ? 'Continue Recipe' : 'Start Recipe'}
-        </button>)
+    (useMeal || useDrink) ? (
+      <button
+        className="startRecipe-btn"
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ handleRecipeBtn }
+      >
+        {getInProgressList(url, handleId())
+          ? 'Continue Recipe' : 'Start Recipe'}
+      </button>) : true
 
   );
 }

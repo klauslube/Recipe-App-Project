@@ -12,9 +12,9 @@ export default function FoodsDetails() {
   const [useMeal, setMeal] = useState();
   const TYPE = 5;
   const TYPE_NAME = 1;
-  const NUM3 = 3;
-  const NUM4 = 4;
-  const NUM5 = 5;
+  // const NUM3 = 3;
+  // const NUM4 = 4;
+  // const NUM5 = 5;
   const { location } = history;
   const { pathname } = location;
   const splitPathName = pathname.split('/');
@@ -22,8 +22,8 @@ export default function FoodsDetails() {
   const [useMeasure, setMeasure] = useState();
   const [useAllDrinks, setAllDrinks] = useState();
 
-  const MAX = 19;
-  const randomValue1 = Math.floor(Math.random() * MAX);
+  // const MAX = 19;
+  // const randomValue1 = Math.floor(Math.random() * MAX);
 
   useEffect(() => {
     fetchApi('/foods', TYPE, splitPathName[2])
@@ -57,19 +57,27 @@ export default function FoodsDetails() {
   //   history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
   // };
 
-  const randomRecommended = () => {
+  const showRecommended = () => {
     const responseAll = [];
     if (useAllDrinks) {
-      responseAll.push(useAllDrinks[randomValue1]);
-      responseAll.push(useAllDrinks[randomValue1 + 1]);
-      responseAll.push(useAllDrinks[randomValue1 + 2]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM3]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM4]);
-      responseAll.push(useAllDrinks[randomValue1 + NUM5]);
+      responseAll.push(useAllDrinks[0]);
+      responseAll.push(useAllDrinks[1]);
+      responseAll.push(useAllDrinks[2]);
+      responseAll.push(useAllDrinks[3]);
+      responseAll.push(useAllDrinks[4]);
+      responseAll.push(useAllDrinks[5]);
     }
     console.log(responseAll);
     return responseAll;
   };
+
+  // const srcYoutube = () => {
+  //   const link = useMeal.meals[0].srcYoutube;
+  //   // const replace = str.replace(/watch?v=/i, 'embed/');
+  //   // const str =`https://www.youtube.com/embed/${srcId}`;
+  //   console.log(link);
+  //   return link;
+  // };
 
   return (
     <div>
@@ -114,32 +122,34 @@ export default function FoodsDetails() {
             <video
               data-testid="video"
               controls
-              src={ useMeal.meals[0].strYoutube }
+              src={ useMeal.meals[0].srcYoutube }
             >
               <track kind="captions" />
             </video>
           </div>
           <p>Recommended</p>
           <div className="scrollmenu">
-            {(randomRecommended()) && (
-              randomRecommended()
+            {(showRecommended()) && (
+              showRecommended()
                 .map((card, index) => (
                   <div
                     key={ index }
                     data-testid={ `${index}-recomendation-card` }
                   >
-
                     <img
                       style={ { width: '200px' } }
                       src={ card.strDrinkThumb }
                       alt="recommeended drink"
                     />
-
-                    <h3
-                      data-testid={ `${index}-recomendation-title` }
-                    >
-                      {card.strDrink}
-                    </h3>
+                    <div>
+                      <h4>{card.strAlcoholic}</h4>
+                      <h3
+                        className="heading-recomendation"
+                        data-testid={ `${index}-recomendation-title` }
+                      >
+                        {card.strDrink}
+                      </h3>
+                    </div>
 
                   </div>
                 ))
