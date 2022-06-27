@@ -83,6 +83,14 @@ export function getFavoriteRecipe(id) {
   return response;
 }
 
+export function getAllFavoritesRecipes() {
+  if (!localStorage.getItem('favoriteRecipes')) {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+  const response = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  return response;
+}
+
 export function setDoneRecipe(recipe, op) {
   if (!localStorage.getItem('doneRecipes')) {
     localStorage.setItem('doneRecipes', JSON.stringify([]));
