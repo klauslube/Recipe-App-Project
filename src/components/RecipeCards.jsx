@@ -28,8 +28,12 @@ function RecipeCards() {
     setCards(recipes);
   }, [meals, drinks, urlLocation]);
 
-  const handleCardClick = ({ target }) => {
-    history.push(`${urlLocation}/${target.name}`);
+  // const handleCardClick = ({ target }) => {
+  //   history.push(`${urlLocation}/${target.name}`);
+  // };
+
+  const handleCardClick = () => {
+    history.push('/favorite-recipes');
   };
 
   return (

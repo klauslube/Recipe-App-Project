@@ -1,0 +1,18 @@
+.img {
+  height: 100px;
+  width: 100px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 360px;
+}
+
+.left-content-card {
+  width: 45%;
+}
+
+.right-content-card {
+  width: 45%;
+}
