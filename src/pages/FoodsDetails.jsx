@@ -146,7 +146,11 @@ export default function FoodsDetails() {
                   ))
               )}
             </div>
-            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn url="/foods" />}
+            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn
+              url="/foods"
+              meals={ useMeal.meals[0] }
+
+            />}
             {/*
             //   <button
             //     className="startRecipe-btn"
