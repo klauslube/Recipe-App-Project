@@ -22,7 +22,7 @@ function RecipeCards() {
 
   useEffect(() => {
     let recipes = [];
-    if (urlLocation === '/foods') recipes = limitCards(meals);
+    if (urlLocation.includes('/foods')) recipes = limitCards(meals);
     if (urlLocation === '/drinks') recipes = limitCards(drinks);
 
     setCards(recipes);
@@ -38,7 +38,7 @@ function RecipeCards() {
         let recipeName = '';
         let recipeThumb = '';
         let recipeId = '';
-        if (urlLocation === '/foods') {
+        if (urlLocation.includes('/foods')) {
           recipeName = recipe.strMeal;
           recipeThumb = recipe.strMealThumb;
           recipeId = recipe.idMeal;
