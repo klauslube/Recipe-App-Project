@@ -45,25 +45,18 @@ export default function DrinksDetails() {
   const handleIngredients = () => {
     const response = [];
     if (useIngredient && useMeasure) {
-      // console.log('ig===', useIngredient, 'mea====', useMeasure);
       useIngredient.forEach((key, index) => {
         if (useMeasure[index]) {
           response.push(`${key[1]} - ${useMeasure[index][1]}`);
         } else {
           response.push(`${key[1]}`);
         }
-        // console.log(response);
       });
     }
     return response;
   };
 
-  // const handleRecipeBtn = (event) => {
-  //   event.preventDefault();
-  //   history.push(`/drinks/${useDrink.drinks[0].idDrink}/in-progress`);
-  // };
-
-  const randomRecommended = () => {
+  const showRecommended = () => {
     const responseAll = [];
     if (useAllMeals) {
       responseAll.push(useAllMeals[0]);
@@ -73,7 +66,7 @@ export default function DrinksDetails() {
       responseAll.push(useAllMeals[4]);
       responseAll.push(useAllMeals[5]);
     }
-    console.log(responseAll);
+    // console.log(responseAll);
     return responseAll;
   };
 
@@ -111,32 +104,33 @@ export default function DrinksDetails() {
                   </p>))}
 
             </div>
-
             <div>
               <p>Instructions</p>
               <div data-testid="instructions">{useDrink.drinks[0].strInstructions}</div>
             </div>
             <div className="scrollmenu">
               <p>Recommended</p>
-              {(randomRecommended()) && (
-                randomRecommended()
+              {(showRecommended()) && (
+                showRecommended()
                   .map((card, index) => (
                     <div
                       key={ index }
                       data-testid={ `${index}-recomendation-card` }
                     >
-
                       <img
-                        style={ { width: '200px' } }
+                        style={ { width: '150px' } }
                         src={ card.strMealThumb }
                         alt="recommeended meal"
                       />
-
-                      <h3
-                        data-testid={ `${index}-recomendation-title` }
-                      >
-                        {card.strDrink}
-                      </h3>
+                      <div>
+                        <h4>{card.strCategory}</h4>
+                        <h3
+                          className="heading-recomendation"
+                          data-testid={ `${index}-recomendation-title` }
+                        >
+                          {card.strMeal}
+                        </h3>
+                      </div>
 
                     </div>
                   ))
@@ -146,19 +140,6 @@ export default function DrinksDetails() {
               url="/drinks"
               drinks={ useDrink.drinks[0] }
             />}
-            {/* {!getFinished(useDrink.drinks[0].idMeal) && (
-
-              <button
-                className="startRecipe-btn"
-                type="submit"
-                data-testid="start-recipe-btn"
-                onClick={ handleRecipeBtn }
-              >
-                {getInProgressList('/drinks', useDrink.drinks[0].idDrink)
-                  ? 'Continue Recipe' : 'Start Recipe'}
-
-              </button>
-            ) } */}
           </div>)}
       </form>
     </div>

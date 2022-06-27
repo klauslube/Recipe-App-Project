@@ -67,7 +67,7 @@ export default function FoodsDetails() {
       responseAll.push(useAllDrinks[4]);
       responseAll.push(useAllDrinks[5]);
     }
-    console.log(responseAll);
+    // console.log(responseAll);
     return responseAll;
   };
 
@@ -137,7 +137,7 @@ export default function FoodsDetails() {
                     data-testid={ `${index}-recomendation-card` }
                   >
                     <img
-                      style={ { width: '200px' } }
+                      style={ { width: '150px' } }
                       src={ card.strDrinkThumb }
                       alt="recommeended drink"
                     />
@@ -159,18 +159,6 @@ export default function FoodsDetails() {
             url="/foods"
             meals={ useMeal.meals[0] }
           />}
-          {/*
-            //   <button
-            //     className="startRecipe-btn"
-            //     type="submit"
-            //     data-testid="start-recipe-btn"
-            //     onClick={ handleRecipeBtn }
-            //   >
-            //     {getInProgressList('/foods', useMeal.meals[0].idMeal)
-            //       ? 'Continue Recipe' : 'Start Recipe'}
-            //   </button>
-            // ) } */}
-
         </div>)}
     </div>
   );
