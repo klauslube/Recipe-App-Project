@@ -73,85 +73,83 @@ export default function FoodsDetails() {
 
   return (
     <div>
-      <form>
-        {useMeal && (
+      {useMeal && (
+        <div>
+          <img
+            data-testid="recipe-photo"
+            src={ useMeal.meals[0].strMealThumb }
+            alt="recipe-img"
+          />
+          <p data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
+          <ShareBtn
+            url="/foods"
+            recipeId={ useMeal.meals[0].idMeal }
+            dataTestId="share-btn"
+          />
+          <FavoriteBtn
+            recipe={ useMeal.meals[0] }
+            url="/foods"
+            dataTestId="favorite-btn"
+          />
+          <p data-testid="recipe-category">{useMeal.meals[0].strCategory}</p>
           <div>
-            <img
-              data-testid="recipe-photo"
-              src={ useMeal.meals[0].strMealThumb }
-              alt="recipe-img"
-            />
-            <p data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
-            <ShareBtn
-              recipeId={ useMeal.meals[0].idMeal }
-              url="/foods"
-              dataTestId="share-btn"
-            />
-            <FavoriteBtn
-              recipe={ useMeal.meals[0] }
-              url="/drinks"
-              dataTestId="share-btn"
-            />
-            <p data-testid="recipe-category">{useMeal.meals[0].strCategory}</p>
-            <div>
-              <p>Ingredients</p>
-              {(handleIngredients()) && (handleIngredients())
-                .map((values, index) => (
-                  <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
+            <p>Ingredients</p>
+            {(handleIngredients()) && (handleIngredients())
+              .map((values, index) => (
+                <p
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                  key={ index }
+                >
+                  {values}
+                </p>))}
+
+          </div>
+
+          <div>
+            <p>Instructions</p>
+            <div data-testid="instructions">{useMeal.meals[0].strInstructions}</div>
+          </div>
+          <div>
+            <p>Video</p>
+            <video
+              data-testid="video"
+              controls
+              src={ useMeal.meals[0].strYoutube }
+            >
+              <track kind="captions" />
+            </video>
+          </div>
+          <p>Recommended</p>
+          <div className="scrollmenu">
+            {(randomRecommended()) && (
+              randomRecommended()
+                .map((card, index) => (
+                  <div
                     key={ index }
+                    data-testid={ `${index}-recomendation-card` }
                   >
-                    {values}
-                  </p>))}
 
-            </div>
+                    <img
+                      style={ { width: '200px' } }
+                      src={ card.strDrinkThumb }
+                      alt="recommeended drink"
+                    />
 
-            <div>
-              <p>Instructions</p>
-              <div data-testid="instructions">{useMeal.meals[0].strInstructions}</div>
-            </div>
-            <div>
-              <p>Video</p>
-              <video
-                data-testid="video"
-                controls
-                src={ useMeal.meals[0].strYoutube }
-              >
-                <track kind="captions" />
-              </video>
-            </div>
-            <div className="scrollmenu">
-              <p>Recommended</p>
-              {(randomRecommended()) && (
-                randomRecommended()
-                  .map((card, index) => (
-                    <div
-                      key={ index }
-                      data-testid={ `${index}-recomendation-card` }
+                    <h3
+                      data-testid={ `${index}-recomendation-title` }
                     >
+                      {card.strDrink}
+                    </h3>
 
-                      <img
-                        style={ { width: '200px' } }
-                        src={ card.strDrinkThumb }
-                        alt="recommeended drink"
-                      />
-
-                      <h3
-                        data-testid={ `${index}-recomendation-title` }
-                      >
-                        {card.strDrink}
-                      </h3>
-
-                    </div>
-                  ))
-              )}
-            </div>
-            {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn
-              url="/foods"
-              meals={ useMeal.meals[0] }
-
-            />}
-            {/*
+                  </div>
+                ))
+            )}
+          </div>
+          {(useMeal.meals[0] && !getFinished(useMeal.meals[0].idMeal)) && <HandleBtn
+            url="/foods"
+            meals={ useMeal.meals[0] }
+          />}
+          {/*
             //   <button
             //     className="startRecipe-btn"
             //     type="submit"
@@ -163,8 +161,7 @@ export default function FoodsDetails() {
             //   </button>
             // ) } */}
 
-          </div>)}
-      </form>
+        </div>)}
     </div>
   );
 }

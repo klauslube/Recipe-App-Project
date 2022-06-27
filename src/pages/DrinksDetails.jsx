@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 import '../App.css';
+import ShareBtn from '../components/ShareBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
+// import HandleBtn from '../components/HandleBtn';
 // import { getFinished, getInProgressList } from '../helpers/manageLocalStorage';
 
 export default function DrinksDetails() {
@@ -85,8 +88,16 @@ export default function DrinksDetails() {
               alt="recipe-img"
             />
             <p data-testid="recipe-title">{useDrink.drinks[0].strDrink}</p>
-            <button type="button" data-testid="share-btn">compartilhar</button>
-            <button type="button" data-testid="favorite-btn">favoritar</button>
+            <ShareBtn
+              recipeId={ useDrink.drinks[0].idDrink }
+              url="/drinks"
+              dataTestId="share-btn"
+            />
+            <FavoriteBtn
+              recipe={ useDrink.drinks[0] }
+              url="/drinks"
+              dataTestId="favorite-btn"
+            />
             <p data-testid="recipe-category">{useDrink.drinks[0].strAlcoholic}</p>
             <div>
               <p>Ingredients</p>
@@ -131,6 +142,10 @@ export default function DrinksDetails() {
                   ))
               )}
             </div>
+            {/* {!getFinished(useMeal.meals[0].idMeal) && <HandleBtn
+              url="/drinks"
+              drinks={ useDrink.drinks[0] }
+            />} */}
             {/* {!getFinished(useDrink.drinks[0].idMeal) && (
 
               <button

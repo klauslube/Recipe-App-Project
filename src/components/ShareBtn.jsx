@@ -10,7 +10,8 @@ export default function ShareBtn(props) {
     // const urlBase = ((window.location.href).split('/done-recipes'))[0];
     const urlBase = 'http://localhost:3000';
     navigator.clipboard.writeText(`${urlBase}${url}/${recipeId}`);
-    target.textContent = 'Link copied!';
+    target.parentElement.textContent = 'Link copied!';
+    console.log(target);
   };
 
   return (

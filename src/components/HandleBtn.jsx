@@ -22,6 +22,7 @@ export default function HandleBtn(props) {
   //   //       setMeal(res);
   //   //     } else setDrink(res);
   //   //   });
+    console.log(meals, drinks);
     if (meals) setMeal(meals);
     if (drinks) setDrink(drinks);
   }, []);
@@ -45,12 +46,12 @@ export default function HandleBtn(props) {
   };
 
   return (
-    (useMeal || useDrink)
+    (useMeal[0] || useDrink[0])
 
       && (
         <button
           className="startRecipe-btn"
-          type="submit"
+          type="button"
           data-testid="start-recipe-btn"
           onClick={ handleRecipeBtn }
         >
