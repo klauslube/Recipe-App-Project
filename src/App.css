@@ -72,39 +72,33 @@
   }
 }
 
-div.scrollmenu {
+.scrollmenu {
   display : flex;
-  /* background-color: #333; */
   overflow: auto;
   white-space: nowrap;
   width: 360px;
-  /* height: 50vh; */
 }
 
 .scrollmenu div {
   color: white;
   padding: 20px;
   text-align: center;
-  width: 60%;
   text-decoration: none;
+  width: 60%;
 }
 
 .scrollmenu div:hover {
   background-color: #777;
 }
 
-/* .scrollmenu img {
-  width: '200px';
-} */
-
 .heading-recomendation {
   color: black;
 }
 
 .video-responsive {
+  height: 0;
   overflow: hidden;
   padding-bottom: 56.25%;
-  height: 0;
   position: relative;
 }
 
