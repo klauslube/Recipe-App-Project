@@ -38,8 +38,8 @@
 }
 
 .startRecipe-btn {
-  position: fixed;
   bottom: 0;
+  position: fixed;
 }
 
 @keyframes shake {
@@ -81,15 +81,15 @@ div.scrollmenu {
   /* height: 50vh; */
 }
 
-div.scrollmenu div {
+.scrollmenu div {
   color: white;
-  width: 60%;
-  text-align: center;
   padding: 20px;
+  text-align: center;
+  width: 60%;
   text-decoration: none;
 }
 
-div.scrollmenu div:hover {
+.scrollmenu div:hover {
   background-color: #777;
 }
 
@@ -104,14 +104,14 @@ div.scrollmenu div:hover {
 .video-responsive {
   overflow: hidden;
   padding-bottom: 56.25%;
-  position: relative;
   height: 0;
+  position: relative;
 }
 
 .video-responsive iframe {
   left: 0;
   top: 0;
+  position: absolute;
   height: 100%;
   width: 360px;
-  position: absolute;
 }
