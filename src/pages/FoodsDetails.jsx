@@ -119,13 +119,19 @@ export default function FoodsDetails() {
           </div>
           <div>
             <p>Video</p>
-            <video
-              data-testid="video"
-              controls
-              src={ useMeal.meals[0].srcYoutube }
-            >
-              <track kind="captions" />
-            </video>
+            <div className="video-responsive">
+              <iframe
+                data-testid="video"
+                src={ (useMeal.meals[0].strYoutube
+                  ? useMeal.meals[0].strYoutube.replace('watch?v=', 'embed/') : '') }
+                title="video"
+                width="360"
+                height="340"
+                frameBorder="0"
+                allow="accelerometer;"
+                allowFullScreen
+              />
+            </div>
           </div>
           <p>Recommended</p>
           <div className="scrollmenu">
