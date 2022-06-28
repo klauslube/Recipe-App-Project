@@ -29,7 +29,8 @@ function RecipeCards() {
   }, [meals, drinks, urlLocation]);
 
   const handleCardClick = ({ target }) => {
-    history.push(`${urlLocation}/${target.name}`);
+    if (urlLocation.includes('/explore')) history.push((`/foods/${target.name}`));
+    else history.push(`${urlLocation}/${target.name}`);
   };
 
   return (
