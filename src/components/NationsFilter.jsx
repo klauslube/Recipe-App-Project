@@ -2,45 +2,63 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreators } from '../redux/actions';
 import fetchApi from '../helpers/fetchApi';
+import RecipeCards from './RecipeCards';
 
 export default function Nationalities() {
   const NUM = 6;
+  const M = 26;
   const [useNation, setNation] = useState();
+  const [useSelectFilter, setSelectFilter] = useState({ area: 'All' });
   const { setMealsAction } = actionCreators;
   const dispatch = useDispatch();
+  // const { filter } = props;
+
   useEffect(() => {
-    fetchApi('/foods', NUM, 'list').then((res) => {
+    fetchApi('/foods', 1, '').then((res) => {
       dispatch(setMealsAction(res.meals));
-      setNation(res.meals);
-      console.log(res.meals);
+      // console.log(res.meals);
     });
   }, []);
 
-  const AllFilters = () => {
-    const M = 26;
-    useNation.unshift({ strArea: 'All' });
-    // useNation.filter((value) => value.strArea === 'Unknown');
-    useNation.splice(M, 1);
+  useEffect(() => {
+    fetchApi('/foods', NUM, 'list').then((res) => {
+      const recipes = res.meals;
+      const all = { strArea: 'All' };
+      let newArr = [];
+      newArr = [all, ...recipes];
+      newArr.splice(M, 1);
+      console.log(newArr);
+      dispatch(setMealsAction(res.meals));
+      setNation(newArr);
+    });
+  }, []);
+
+  const handleFilterClick = ({ target }) => {
+    setSelectFilter({ [target.name]: target.value });
+    return console.log(useSelectFilter);
+    // cards.filter((recipes) => recipes.strArea === filter);
   };
-
-  // const handleFilterClick = () => {
-
-  // }
 
   return (
     <div>
-      {useNation && AllFilters()}
-      <select data-testid="explore-by-nationality-dropdown">
-        {useNation && useNation.map((meal) => (
+      <select
+        data-testid="explore-by-nationality-dropdown"
+        name="area"
+        onChange={ (e) => handleFilterClick(e) }
+      >
+        {useNation && useNation.map((meal, i) => (
           <option
-            key={ meal.strArea }
+            key={ i }
             data-testid={ `${meal.strArea}-option` }
-            // onClick={}
+            name={ meal.strArea }
+            value={ meal.strArea }
+
           >
             {meal.strArea}
           </option>
         ))}
       </select>
+      <RecipeCards />
     </div>
   );
 }
