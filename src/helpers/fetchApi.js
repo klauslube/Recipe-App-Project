@@ -8,6 +8,7 @@ const CATEGORIES_LIST = 3;
 const CATEGORIES_FILTER = 4;
 const DETAILS = 5;
 const NATIONS = 6;
+const NATIONS_FILTER = 7;
 async function fetchApi(currentUrl, type, filter) {
   let baseUrl = '';
   if (currentUrl === '/foods') baseUrl = mealBaseUrl;
@@ -20,6 +21,7 @@ async function fetchApi(currentUrl, type, filter) {
   else if (type === CATEGORIES_FILTER) baseUrl += `filter.php?c=${filter}`;
   else if (type === DETAILS) baseUrl += `lookup.php?i=${filter}`;
   else if (type === NATIONS) baseUrl += `list.php?a=${filter}`;
+  else if (type === NATIONS_FILTER) baseUrl += `filter.php?a=${filter}`;
 
   const responseApi = await fetch(baseUrl);
   const response = await responseApi.json();

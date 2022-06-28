@@ -6,19 +6,20 @@ import RecipeCards from './RecipeCards';
 
 export default function Nationalities() {
   const NUM = 6;
+  const NUM2 = 7;
   const M = 26;
   const [useNation, setNation] = useState();
-  const [useSelectFilter, setSelectFilter] = useState({ area: 'All' });
+  // const [useSelectFilter, setSelectFilter] = useState({ area: 'All' });
   const { setMealsAction } = actionCreators;
   const dispatch = useDispatch();
   // const { filter } = props;
 
-  useEffect(() => {
-    fetchApi('/foods', 1, '').then((res) => {
-      dispatch(setMealsAction(res.meals));
-      // console.log(res.meals);
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchApi('/foods', 1, '').then((res) => {
+  //     dispatch(setMealsAction(res.meals));
+  //     // console.log(res.meals);
+  //   });
+  // }, []);
 
   useEffect(() => {
     fetchApi('/foods', NUM, 'list').then((res) => {
@@ -33,10 +34,13 @@ export default function Nationalities() {
     });
   }, []);
 
-  const handleFilterClick = ({ target }) => {
-    setSelectFilter({ [target.name]: target.value });
-    return console.log(useSelectFilter);
-    // cards.filter((recipes) => recipes.strArea === filter);
+  const handleFilterClick = async ({ target }) => {
+    const filter = target.value;
+    let response;
+    if (filter === 'All') response = await fetchApi('/foods', 1, '');
+    else response = await fetchApi('/foods', NUM2, filter);
+
+    dispatch(setMealsAction(response, filter));
   };
 
   return (
@@ -44,7 +48,7 @@ export default function Nationalities() {
       <select
         data-testid="explore-by-nationality-dropdown"
         name="area"
-        onChange={ (e) => handleFilterClick(e) }
+        onChange={ handleFilterClick }
       >
         {useNation && useNation.map((meal, i) => (
           <option
@@ -52,7 +56,6 @@ export default function Nationalities() {
             data-testid={ `${meal.strArea}-option` }
             name={ meal.strArea }
             value={ meal.strArea }
-
           >
             {meal.strArea}
           </option>
