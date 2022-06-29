@@ -11,17 +11,16 @@ export default function ShareBtn(props) {
     const urlBase = 'http://localhost:3000';
     navigator.clipboard.writeText(`${urlBase}${url}/${recipeId}`);
     target.parentElement.textContent = 'Link copied!';
-    console.log(target);
   };
 
   return (
-    <label htmlFor={ recipeId }>
+    <label htmlFor={ `Share_${recipeId}` }>
       <input
         type="image"
         src={ shareIcon }
         data-testid={ dataTestId }
-        onClick={ (e) => handleShareBtn(e) }
-        id={ recipeId }
+        onClick={ handleShareBtn }
+        id={ `Share_${recipeId}` }
         alt="share"
       />
       Share
