@@ -10,6 +10,7 @@ const DETAILS = 5;
 const NATIONS = 6;
 const NATIONS_FILTER = 7;
 const RANDOM = 8;
+const ALL_INGREDIENTS = 9;
 async function fetchApi(currentUrl, type, filter) {
   let baseUrl = '';
   if (currentUrl === '/foods') baseUrl = mealBaseUrl;
@@ -24,6 +25,7 @@ async function fetchApi(currentUrl, type, filter) {
   else if (type === NATIONS) baseUrl += `list.php?a=${filter}`;
   else if (type === NATIONS_FILTER) baseUrl += `filter.php?a=${filter}`;
   else if (type === RANDOM) baseUrl += `random.php${filter}`;
+  else if (type === ALL_INGREDIENTS) baseUrl += 'list.php?i=list';
   const responseApi = await fetch(baseUrl);
   const response = await responseApi.json();
   return response;

@@ -9,17 +9,8 @@ export default function Nationalities() {
   const NUM2 = 7;
   const M = 26;
   const [useNation, setNation] = useState();
-  // const [useSelectFilter, setSelectFilter] = useState({ area: 'All' });
   const { setMealsAction } = actionCreators;
   const dispatch = useDispatch();
-  // const { filter } = props;
-
-  // useEffect(() => {
-  //   fetchApi('/foods', 1, '').then((res) => {
-  //     dispatch(setMealsAction(res.meals));
-  //     // console.log(res.meals);
-  //   });
-  // }, []);
 
   useEffect(() => {
     fetchApi('/foods', NUM, 'list').then((res) => {
@@ -28,7 +19,6 @@ export default function Nationalities() {
       let newArr = [];
       newArr = [all, ...recipes];
       newArr.splice(M, 1);
-      console.log(newArr);
       dispatch(setMealsAction(res.meals));
       setNation(newArr);
     });
