@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import '../styles/recipeCards.css';
 
 function RecipeCards() {
   const history = useHistory();
@@ -57,6 +58,7 @@ function RecipeCards() {
             name={ recipeId }
           >
             <img
+              className="img-cards"
               data-testid={ `${index}-card-img` }
               alt={ recipeName }
               src={ recipeThumb }
