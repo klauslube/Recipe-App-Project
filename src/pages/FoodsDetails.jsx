@@ -12,9 +12,6 @@ export default function FoodsDetails() {
   const [useMeal, setMeal] = useState();
   const TYPE = 5;
   const TYPE_NAME = 1;
-  // const NUM3 = 3;
-  // const NUM4 = 4;
-  // const NUM5 = 5;
   const { location } = history;
   const { pathname } = location;
   const splitPathName = pathname.split('/');
@@ -22,13 +19,9 @@ export default function FoodsDetails() {
   const [useMeasure, setMeasure] = useState();
   const [useAllDrinks, setAllDrinks] = useState();
 
-  // const MAX = 19;
-  // const randomValue1 = Math.floor(Math.random() * MAX);
-
   useEffect(() => {
     fetchApi('/foods', TYPE, splitPathName[2])
       .then((res) => {
-        console.log(res.meals[0]);
         setMeal(res);
         setIngredient((Object.entries(res.meals[0])
           .filter((key) => (key[0].includes('strIngredient') && key[1] !== ''))));
@@ -37,7 +30,6 @@ export default function FoodsDetails() {
       });
     fetchApi('/drinks', TYPE_NAME, '')
       .then((res) => {
-        console.log(res);
         setAllDrinks(res.drinks);
       });
   }, []);
@@ -52,11 +44,6 @@ export default function FoodsDetails() {
     return response;
   };
 
-  // const handleRecipeBtn = (event) => {
-  //   event.preventDefault();
-  //   history.push(`/foods/${useMeal.meals[0].idMeal}/in-progress`);
-  // };
-
   const showRecommended = () => {
     const responseAll = [];
     if (useAllDrinks) {
@@ -67,17 +54,8 @@ export default function FoodsDetails() {
       responseAll.push(useAllDrinks[4]);
       responseAll.push(useAllDrinks[5]);
     }
-    // console.log(responseAll);
     return responseAll;
   };
-
-  // const srcYoutube = () => {
-  //   const link = useMeal.meals[0].srcYoutube;
-  //   // const replace = str.replace(/watch?v=/i, 'embed/');
-  //   // const str =`https://www.youtube.com/embed/${srcId}`;
-  //   console.log(link);
-  //   return link;
-  // };
 
   return (
     <div>

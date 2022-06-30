@@ -12,9 +12,6 @@ export default function DrinksDetails() {
   const [useDrink, setDrink] = useState();
   const TYPE = 5;
   const TYPE_NAME = 1;
-  // const NUM3 = 3;
-  // const NUM4 = 4;
-  // const NUM5 = 5;
   const { location } = history;
   const { pathname } = location;
   const splitPathName = pathname.split('/');
@@ -22,13 +19,9 @@ export default function DrinksDetails() {
   const [useMeasure, setMeasure] = useState();
   const [useAllMeals, setAllMeals] = useState();
 
-  // const MAX = 19;
-  // const randomValue1 = Math.floor(Math.random() * MAX);
-
   useEffect(() => {
     fetchApi('/drinks', TYPE, splitPathName[2])
       .then((res) => {
-        console.log(res.drinks[0]);
         setDrink(res);
         setIngredient((Object.entries(res.drinks[0])
           .filter((key) => (key[0].includes('strIngredient') && key[1] !== null))));
@@ -37,7 +30,6 @@ export default function DrinksDetails() {
       });
     fetchApi('/foods', TYPE_NAME, '')
       .then((res) => {
-        console.log(res);
         setAllMeals(res.meals);
       });
   }, []);
@@ -66,7 +58,6 @@ export default function DrinksDetails() {
       responseAll.push(useAllMeals[4]);
       responseAll.push(useAllMeals[5]);
     }
-    // console.log(responseAll);
     return responseAll;
   };
 

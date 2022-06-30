@@ -8,21 +8,9 @@ export default function HandleBtn(props) {
   const history = useHistory();
   const [useMeal, setMeal] = useState([]);
   const [useDrink, setDrink] = useState([]);
-  // const { location } = history;
-  // const { pathname } = location;
-  // const TYPE = 5;
-  // const splitPathName = pathname.split('/');
   const { url, meals, drinks } = props;
 
   useEffect(() => {
-  //   // fetchApi(url, TYPE, splitPathName[2])
-  //   //   .then((res) => {
-  //   //     console.log('teste');
-  //   //     if (url === '/foods') {
-  //   //       setMeal(res);
-  //   //     } else setDrink(res);
-  //   //   });
-    // console.log(meals, drinks);
     if (meals) setMeal(meals);
     if (drinks) setDrink(drinks);
   }, []);
@@ -45,7 +33,6 @@ export default function HandleBtn(props) {
     }
   };
 
-  console.log(useMeal);
   return (
     (useMeal || useDrink) ? (
       <button
@@ -54,7 +41,7 @@ export default function HandleBtn(props) {
         data-testid="start-recipe-btn"
         onClick={ handleRecipeBtn }
       >
-        {getInProgressList(url, handleId())
+        {getInProgressList(url, handleId()).length > 0
           ? 'Continue Recipe' : 'Start Recipe'}
       </button>) : true
 

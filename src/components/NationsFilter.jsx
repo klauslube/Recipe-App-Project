@@ -29,7 +29,6 @@ export default function Nationalities() {
     let response;
     if (filter === 'All') response = await fetchApi('/foods', 1, '');
     else response = await fetchApi('/foods', NUM2, filter);
-    console.log(response);
     dispatch(setMealsAction(response.meals));
   };
 

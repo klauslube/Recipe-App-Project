@@ -37,7 +37,6 @@ export default function ExploreFoods() {
       </div>
       {data && (
         <div>
-          {console.log(data)}
           <button
             type="button"
             data-testid="explore-surprise"
