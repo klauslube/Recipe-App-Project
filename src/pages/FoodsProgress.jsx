@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
-import '../styles/RecipeProgress.css';
+import StyledRecipeDetails from '../styles/StyledRecipeDetails';
 import {
   updateInProgress,
   getInProgressList,
@@ -92,57 +92,68 @@ export default function DrinksProgress() {
   };
 
   return (
-    <div>
-      <h1>Foods Progress</h1>
-      {recipe && (
-        <div>
-          <img
-            src={ recipe.strMealThumb }
-            alt="recipe"
-            data-testid="recipe-photo"
-          />
+    <StyledRecipeDetails>
+      <div>
+        {recipe && (
           <div>
-            <h3 data-testid="recipe-title">
-              { recipe.strMeal }
-            </h3>
-            <ShareBtn url="/foods" recipeId={ recipe.idMeal } dataTestId="share-btn" />
-            <FavoriteBtn recipe={ recipe } url="/foods" dataTestId="favorite-btn" />
-            <p data-testid="recipe-category">
-              { recipe.strCategory }
-            </p>
-          </div>
-          <div>
-            {ingredients && ingredients.map((ing, index) => (
-              <div key={ ing }>
-                <label
-                  data-testid={ `${index}-ingredient-step` }
-                  htmlFor={ ing }
-                  className={ (verifyProgress(ing)) ? 'ingSelected' : '' }
-                >
-                  <input
-                    id={ ing }
-                    type="checkbox"
-                    onChange={ handleCheck }
-                    checked={ verifyProgress(ing) }
-                  />
-                  { ing }
-                </label>
+            <img
+              src={ recipe.strMealThumb }
+              alt="recipe"
+              data-testid="recipe-photo"
+            />
+            <div className="title-container">
+              <div>
+                <p className="title" data-testid="recipe-title">
+                  { recipe.strMeal }
+                </p>
+                <p className="category" data-testid="recipe-category">
+                  { recipe.strCategory }
+                </p>
               </div>
-            ))}
+              <div className="button-container">
+                <ShareBtn
+                  url="/foods"
+                  recipeId={ recipe.idMeal }
+                  dataTestId="share-btn"
+                />
+                <FavoriteBtn recipe={ recipe } url="/foods" dataTestId="favorite-btn" />
+              </div>
+            </div>
+            <div className="ingredients-container">
+              {ingredients && ingredients.map((ing, index) => (
+                <div key={ ing }>
+                  <label
+                    data-testid={ `${index}-ingredient-step` }
+                    htmlFor={ ing }
+                    className={ (verifyProgress(ing)) ? 'ingSelected' : '' }
+                  >
+                    <input
+                      id={ ing }
+                      type="checkbox"
+                      onChange={ handleCheck }
+                      checked={ verifyProgress(ing) }
+                    />
+                    { ing }
+                  </label>
+                </div>
+              ))}
+            </div>
+            <div className="instructions-container">
+              <p>Instructions</p>
+              <p data-testid="instructions">{ recipe.strInstructions }</p>
+            </div>
+            <button
+              className="finish-btn"
+              type="button"
+              data-testid="finish-recipe-btn"
+              disabled={ verifyAllIngredients() }
+              onClick={ handleFinish }
+            >
+              Finish
+            </button>
           </div>
-          <div>
-            <p data-testid="instructions">{ recipe.strInstructions }</p>
-          </div>
-          <button
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled={ verifyAllIngredients() }
-            onClick={ handleFinish }
-          >
-            Finish
-          </button>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </StyledRecipeDetails>
   );
 }

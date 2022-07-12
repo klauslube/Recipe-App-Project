@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
@@ -6,6 +7,8 @@ import { getFinished } from '../helpers/manageLocalStorage';
 import HandleBtn from '../components/HandleBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
 import ShareBtn from '../components/ShareBtn';
+import StyledFoodsDetails from '../styles/StyledRecipeDetails';
+import StyledHandleBtn from '../styles/StyledHandleBtn';
 
 export default function FoodsDetails() {
   const history = useHistory();
@@ -58,92 +61,109 @@ export default function FoodsDetails() {
   };
 
   return (
-    <div>
-      {useMeal && (
-        <div>
-          <img
-            data-testid="recipe-photo"
-            src={ useMeal.meals[0].strMealThumb }
-            alt="recipe-img"
-          />
-          <p data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
-          <ShareBtn
-            url="/foods"
-            recipeId={ useMeal.meals[0].idMeal }
-            dataTestId="share-btn"
-          />
-          <FavoriteBtn
-            recipe={ useMeal.meals[0] }
-            url="/foods"
-            dataTestId="favorite-btn"
-          />
-          <p data-testid="recipe-category">{useMeal.meals[0].strCategory}</p>
+    <StyledFoodsDetails>
+      <div>
+        {useMeal && (
           <div>
-            <p>Ingredients</p>
-            {(handleIngredients()) && (handleIngredients())
-              .map((values, index) => (
+            <img
+              data-testid="recipe-photo"
+              src={ useMeal.meals[0].strMealThumb }
+              alt="recipe-img"
+            />
+            <div className="title-container">
+              <div>
+                <p className="title" data-testid="recipe-title">{useMeal.meals[0].strMeal}</p>
                 <p
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                  key={ index }
+                  className="category"
+                  data-testid="recipe-category"
                 >
-                  {values}
-                </p>))}
-
-          </div>
-
-          <div>
-            <p>Instructions</p>
-            <div data-testid="instructions">{useMeal.meals[0].strInstructions}</div>
-          </div>
-          <div>
-            <p>Video</p>
-            <div className="video-responsive">
-              <iframe
-                data-testid="video"
-                src={ (useMeal.meals[0].strYoutube
-                  ? useMeal.meals[0].strYoutube.replace('watch?v=', 'embed/') : '') }
-                title="video"
-                width="360"
-                height="340"
-                frameBorder="0"
-                allow="accelerometer;"
-                allowFullScreen
-              />
+                  {useMeal.meals[0].strCategory}
+                </p>
+              </div>
+              <div className="button-container">
+                <ShareBtn
+                  url="/foods"
+                  recipeId={ useMeal.meals[0].idMeal }
+                  dataTestId="share-btn"
+                />
+                <FavoriteBtn
+                  recipe={ useMeal.meals[0] }
+                  url="/foods"
+                  dataTestId="favorite-btn"
+                />
+              </div>
             </div>
-          </div>
-          <p>Recommended</p>
-          <div className="scrollmenu">
-            {(showRecommended()) && (
-              showRecommended()
-                .map((card, index) => (
-                  <div
+            <div className="ingredients-container">
+              <h3 className="title-ingredient">Ingredients</h3>
+              {(handleIngredients()) && (handleIngredients())
+                .map((values, index) => (
+                  <p
+                    data-testid={ `${index}-ingredient-name-and-measure` }
                     key={ index }
-                    data-testid={ `${index}-recomendation-card` }
                   >
-                    <img
-                      style={ { width: '150px' } }
-                      src={ card.strDrinkThumb }
-                      alt="recommeended drink"
-                    />
-                    <div>
-                      <h4>{card.strAlcoholic}</h4>
-                      <h3
-                        className="heading-recomendation"
-                        data-testid={ `${index}-recomendation-title` }
-                      >
-                        {card.strDrink}
-                      </h3>
-                    </div>
+                    {values}
+                  </p>))}
 
-                  </div>
-                ))
-            )}
-          </div>
-          {(useMeal.meals[0] && !getFinished(useMeal.meals[0].idMeal)) && <HandleBtn
-            url="/foods"
-            meals={ useMeal.meals[0] }
-          />}
-        </div>)}
-    </div>
+            </div>
+
+            <div className="instructions-container">
+              <p>Instructions</p>
+              <div data-testid="instructions">{useMeal.meals[0].strInstructions}</div>
+            </div>
+            <div className="video-container">
+              <p>Video</p>
+              <div className="video-responsive">
+                <iframe
+                  data-testid="video"
+                  src={ (useMeal.meals[0].strYoutube
+                    ? useMeal.meals[0].strYoutube.replace('watch?v=', 'embed/') : '') }
+                  title="video"
+                  width="360"
+                  height="340"
+                  frameBorder="0"
+                  allow="accelerometer;"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+            <div className="recommended-container">
+              <p>Recommended</p>
+              <div className="scrollmenu">
+                {(showRecommended()) && (
+                  showRecommended()
+                    .map((card, index) => (
+                      <div
+                        key={ index }
+                        data-testid={ `${index}-recomendation-card` }
+                      >
+                        <img
+                          style={ { width: '150px' } }
+                          src={ card.strDrinkThumb }
+                          alt="recommeended drink"
+                        />
+                        <div>
+                          <h4>{card.strAlcoholic}</h4>
+                          <h3
+                            className="heading-recomendation"
+                            data-testid={ `${index}-recomendation-title` }
+                          >
+                            {card.strDrink}
+                          </h3>
+                        </div>
+
+                      </div>
+                    ))
+                )}
+              </div>
+            </div>
+            <StyledHandleBtn>
+              {(useMeal.meals[0] && !getFinished(useMeal.meals[0].idMeal)) && <HandleBtn
+                url="/foods"
+                meals={ useMeal.meals[0] }
+              />}
+            </StyledHandleBtn>
+          </div>)}
+      </div>
+    </StyledFoodsDetails>
   );
 }

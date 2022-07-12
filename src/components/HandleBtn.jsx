@@ -6,8 +6,8 @@ import { getInProgressList } from '../helpers/manageLocalStorage';
 
 export default function HandleBtn(props) {
   const history = useHistory();
-  const [useMeal, setMeal] = useState([]);
-  const [useDrink, setDrink] = useState([]);
+  const [useMeal, setMeal] = useState();
+  const [useDrink, setDrink] = useState();
   const { url, meals, drinks } = props;
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function HandleBtn(props) {
         data-testid="start-recipe-btn"
         onClick={ handleRecipeBtn }
       >
-        {getInProgressList(url, handleId()).length > 0
+        {getInProgressList(url, handleId())
           ? 'Continue Recipe' : 'Start Recipe'}
       </button>) : true
 

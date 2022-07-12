@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { actionCreators } from '../redux/actions';
 import fetchApi from '../helpers/fetchApi';
 import RecipeCards from './RecipeCards';
+import StyledNations from '../styles/StyledNations';
 
 export default function Nationalities() {
   const NUM = 6;
@@ -33,24 +34,26 @@ export default function Nationalities() {
   };
 
   return (
-    <div>
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        name="area"
-        onChange={ handleFilterClick }
-      >
-        {useNation && useNation.map((meal, i) => (
-          <option
-            key={ i }
-            data-testid={ `${meal.strArea}-option` }
-            name={ meal.strArea }
-            value={ meal.strArea }
-          >
-            {meal.strArea}
-          </option>
-        ))}
-      </select>
-      <RecipeCards />
-    </div>
+    <StyledNations>
+      <div>
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          name="area"
+          onChange={ handleFilterClick }
+        >
+          {useNation && useNation.map((meal, i) => (
+            <option
+              key={ i }
+              data-testid={ `${meal.strArea}-option` }
+              name={ meal.strArea }
+              value={ meal.strArea }
+            >
+              {meal.strArea}
+            </option>
+          ))}
+        </select>
+        <RecipeCards />
+      </div>
+    </StyledNations>
   );
 }

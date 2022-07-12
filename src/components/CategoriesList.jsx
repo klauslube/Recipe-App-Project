@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
 import { actionCreators } from '../redux/actions';
+import StyledCategoriesList from '../styles/StyledCategoriesList';
 
 function CategoriesList() {
   const history = useHistory();
@@ -53,26 +54,28 @@ function CategoriesList() {
   };
 
   return (
-    <div>
-      { categories && categories.map((item) => (
+    <StyledCategoriesList>
+      <div className="wrapper">
+        { categories && categories.map((item) => (
+          <button
+            data-testid={ `${item.strCategory}-category-filter` }
+            key={ item.strCategory }
+            id={ item.strCategory }
+            type="button"
+            onClick={ handleSelectCategory }
+          >
+            { item.strCategory }
+          </button>
+        )) }
         <button
-          data-testid={ `${item.strCategory}-category-filter` }
-          key={ item.strCategory }
-          id={ item.strCategory }
           type="button"
-          onClick={ handleSelectCategory }
+          data-testid="All-category-filter"
+          onClick={ resetFilter }
         >
-          { item.strCategory }
+          All
         </button>
-      )) }
-      <button
-        type="button"
-        data-testid="All-category-filter"
-        onClick={ resetFilter }
-      >
-        All
-      </button>
-    </div>
+      </div>
+    </StyledCategoriesList>
   );
 }
 export default CategoriesList;

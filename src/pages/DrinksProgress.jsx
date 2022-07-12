@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchApi from '../helpers/fetchApi';
-import '../styles/RecipeProgress.css';
 import {
   updateInProgress,
   getInProgressList,
@@ -10,6 +9,7 @@ import {
 } from '../helpers/manageLocalStorage';
 import FavoriteBtn from '../components/FavoriteBtn';
 import ShareBtn from '../components/ShareBtn';
+import StyledRecipeDetails from '../styles/StyledRecipeDetails';
 
 export default function DrinksProgress() {
   const history = useHistory();
@@ -94,56 +94,67 @@ export default function DrinksProgress() {
   };
 
   return (
-    <div>
-      <h1>Drink Progress</h1>
-      {recipe && (
-        <div>
-          <img
-            src={ recipe.strDrinkThumb }
-            alt="recipe"
-            data-testid="recipe-photo"
-          />
+    <StyledRecipeDetails>
+      <div>
+        {recipe && (
           <div>
-            <h3 data-testid="recipe-title">
-              { recipe.strDrink }
-            </h3>
-            <ShareBtn url="/drinks" recipeId={ recipe.idDrink } dataTestId="share-btn" />
-            <FavoriteBtn recipe={ recipe } url="/drinks" dataTestId="favorite-btn" />
-            <p data-testid="recipe-category">
-              { recipe.strAlcoholic }
-            </p>
-          </div>
-          <div>
-            {ingredients && ingredients.map((ing, index) => (
-              <div key={ ing }>
-                <label
-                  data-testid={ `${index}-ingredient-step` }
-                  htmlFor={ ing }
-                >
-                  <input
-                    id={ ing }
-                    type="checkbox"
-                    onChange={ handleCheck }
-                    checked={ verifyProgress(ing) }
-                  />
-                  { ing }
-                </label>
+            <img
+              src={ recipe.strDrinkThumb }
+              alt="recipe"
+              data-testid="recipe-photo"
+            />
+            <div className="title-container">
+              <div>
+                <p className="title" data-testid="recipe-title">
+                  { recipe.strDrink }
+                </p>
+                <p className="category" data-testid="recipe-category">
+                  { recipe.strAlcoholic }
+                </p>
               </div>
-            ))}
+              <div className="button-container">
+                <ShareBtn
+                  url="/drinks"
+                  recipeId={ recipe.idDrink }
+                  dataTestId="share-btn"
+                />
+                <FavoriteBtn recipe={ recipe } url="/drinks" dataTestId="favorite-btn" />
+              </div>
+            </div>
+            <div className="ingredients-container">
+              {ingredients && ingredients.map((ing, index) => (
+                <div key={ ing }>
+                  <label
+                    data-testid={ `${index}-ingredient-step` }
+                    htmlFor={ ing }
+                  >
+                    <input
+                      id={ ing }
+                      type="checkbox"
+                      onChange={ handleCheck }
+                      checked={ verifyProgress(ing) }
+                    />
+                    { ing }
+                  </label>
+                </div>
+              ))}
+            </div>
+            <div className="instructions-container">
+              <p>Instructions</p>
+              <p data-testid="instructions">{ recipe.strInstructions }</p>
+            </div>
+            <button
+              className="finish-btn"
+              type="button"
+              data-testid="finish-recipe-btn"
+              disabled={ verifyAllIngredients() }
+              onClick={ handleFinish }
+            >
+              Finish
+            </button>
           </div>
-          <div>
-            <p data-testid="instructions">{ recipe.strInstructions }</p>
-          </div>
-          <button
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled={ verifyAllIngredients() }
-            onClick={ handleFinish }
-          >
-            Finish
-          </button>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </StyledRecipeDetails>
   );
 }

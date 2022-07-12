@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import '../styles/recipeCards.css';
+import StyledRecipeCards from '../styles/StyledRecipeCards';
 
 function RecipeCards() {
   const history = useHistory();
@@ -35,40 +35,61 @@ function RecipeCards() {
   };
 
   return (
-    <section>
-      { cards && cards.map((recipe, index) => {
-        let recipeName = '';
-        let recipeThumb = '';
-        let recipeId = '';
-        if (urlLocation.includes('/foods')) {
-          recipeName = recipe.strMeal;
-          recipeThumb = recipe.strMealThumb;
-          recipeId = recipe.idMeal;
-        } else if (urlLocation === '/drinks') {
-          recipeName = recipe.strDrink;
-          recipeThumb = recipe.strDrinkThumb;
-          recipeId = recipe.idDrink;
-        }
-        return (
-          <button
-            type="button"
-            data-testid={ `${index}-recipe-card` }
-            key={ `${index}-recipe-card` }
-            onClick={ handleCardClick }
-            name={ recipeId }
-          >
-            <img
-              className="img-cards"
-              data-testid={ `${index}-card-img` }
-              alt={ recipeName }
-              src={ recipeThumb }
-              name={ recipeId }
-            />
-            <p data-testid={ `${index}-card-name` } name={ recipeId }>{ recipeName }</p>
-          </button>
-        );
-      }) }
-    </section>
+    <StyledRecipeCards>
+      <section className="all-recipes">
+        { cards && cards.map((recipe, index) => {
+          let recipeName = '';
+          let recipeThumb = '';
+          let recipeId = '';
+          // let recipeArea = '';
+          // let recipeCategory = '';
+          if (urlLocation.includes('/foods')) {
+            recipeName = recipe.strMeal;
+            recipeThumb = recipe.strMealThumb;
+            recipeId = recipe.idMeal;
+          // recipeArea = recipe.strArea;
+          // recipeCategory = recipe.strCategory;
+          } else if (urlLocation === '/drinks') {
+            recipeName = recipe.strDrink;
+            recipeThumb = recipe.strDrinkThumb;
+            recipeId = recipe.idDrink;
+          }
+          return (
+
+            <div className="recipe-card" key={ `${index}-recipe-card` }>
+              <span className="red-line" />
+              <button
+                className="recipe-button"
+                type="button"
+                data-testid={ `${index}-recipe-card` }
+                onClick={ handleCardClick }
+                name={ recipeId }
+              >
+                <img
+                  className="img-cards"
+                  data-testid={ `${index}-card-img` }
+                  alt={ recipeName }
+                  src={ recipeThumb }
+                  name={ recipeId }
+                />
+                <div className="recipe-text">
+                  <p
+                    className="recipe-name"
+                    data-testid={ `${index}-card-name` }
+                    name={ recipeId }
+                  >
+                    { recipeName }
+
+                  </p>
+                  {/* <p className="recipe-info">{`${recipeArea} - ${recipeCategory}`}</p> */}
+
+                </div>
+              </button>
+            </div>
+          );
+        }) }
+      </section>
+    </StyledRecipeCards>
   );
 }
 export default RecipeCards;

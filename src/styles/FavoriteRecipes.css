@@ -3,11 +3,11 @@
   width: 100px;
 }
 
-.card {
+/* .card {
   display: flex;
   flex-direction: row;
   width: 360px;
-}
+} */
 
 .left-content-card {
   width: 45%;

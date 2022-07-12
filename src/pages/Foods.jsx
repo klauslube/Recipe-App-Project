@@ -13,6 +13,7 @@ export default function Foods() {
   useEffect(() => {
     fetchApi('/foods', 1, '').then((res) => {
       dispatch(setMealsAction(res.meals));
+      console.log(res.meals);
     });
   }, []);
 

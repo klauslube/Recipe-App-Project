@@ -3,6 +3,9 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fetchApi from '../helpers/fetchApi';
+import StyledExploreDrinks from '../styles/StyledExploreDrinks';
+import ingredientIcon from '../images/ingredientIcon.svg';
+import supriseIcon from '../images/supriseIcon.svg';
 
 export default function ExploreDrinks() {
   const history = useHistory();
@@ -14,28 +17,41 @@ export default function ExploreDrinks() {
     );
   }, []);
   return (
-    <div>
+    <StyledExploreDrinks>
       <Header title="Explore Drinks" />
-      <div>
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-          onClick={ () => history.push('/explore/drinks/ingredients') }
-        >
-          By Ingredient
-        </button>
-      </div>
-      {data && (
-        <div>
+      <div className="wrapper">
+        <div className="cards">
+          <p>
+            By
+            <br />
+            Ingredient
+          </p>
           <button
             type="button"
-            data-testid="explore-surprise"
-            onClick={ () => history.push(`/drinks/${data[0].idDrink}`) }
+            data-testid="explore-by-ingredient"
+            onClick={ () => history.push('/explore/drinks/ingredients') }
           >
-            Surprise me!
+            <img src={ ingredientIcon } alt="icon" />
           </button>
-        </div>)}
+        </div>
+        {data && (
+          <div className="cards">
+            <p>
+              Surprise
+              <br />
+              me!
+            </p>
+            <button
+              type="button"
+              className="surpriseIcon"
+              data-testid="explore-surprise"
+              onClick={ () => history.push(`/drinks/${data[0].idDrink}`) }
+            >
+              <img src={ supriseIcon } alt="icon" />
+            </button>
+          </div>)}
+      </div>
       <Footer />
-    </div>
+    </StyledExploreDrinks>
   );
 }

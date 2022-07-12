@@ -21,10 +21,12 @@ import Nationalities from './pages/Nationalities';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import NotFound from './pages/NotFound';
+import GlobalStyle from './styles/GlobalStyle';
 
 function App() {
   return (
     <Provider store={ store }>
+      <GlobalStyle />
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/profile" component={ Profile } />

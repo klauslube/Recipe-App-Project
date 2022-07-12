@@ -6,6 +6,8 @@ import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
 import HandleBtn from '../components/HandleBtn';
 import { getFinished } from '../helpers/manageLocalStorage';
+import StyledRecipeDetails from '../styles/StyledRecipeDetails';
+import StyledHandleBtn from '../styles/StyledHandleBtn';
 
 export default function DrinksDetails() {
   const history = useHistory();
@@ -62,77 +64,101 @@ export default function DrinksDetails() {
   };
 
   return (
-    <div>
-      <form>
-        {useDrink && (
-          <div>
-            <img
-              data-testid="recipe-photo"
-              src={ useDrink.drinks[0].strDrinkThumb }
-              alt="recipe-img"
-            />
-            <p data-testid="recipe-title">{useDrink.drinks[0].strDrink}</p>
-            <ShareBtn
-              recipeId={ useDrink.drinks[0].idDrink }
-              url="/drinks"
-              dataTestId="share-btn"
-            />
-            <FavoriteBtn
-              recipe={ useDrink.drinks[0] }
-              url="/drinks"
-              dataTestId="favorite-btn"
-            />
-            <p data-testid="recipe-category">{useDrink.drinks[0].strAlcoholic}</p>
+    <StyledRecipeDetails>
+      <div>
+        <form>
+          {useDrink && (
             <div>
-              <p>Ingredients</p>
-              {(handleIngredients()) && (handleIngredients())
-                .map((values, index) => (
+              <img
+                data-testid="recipe-photo"
+                src={ useDrink.drinks[0].strDrinkThumb }
+                alt="recipe-img"
+              />
+              <div className="title-container">
+                <div>
                   <p
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                    key={ index }
+                    className="title"
+                    data-testid="recipe-title"
                   >
-                    {values}
-                  </p>))}
+                    {useDrink.drinks[0].strDrink}
+                  </p>
+                  <p
+                    className="category"
+                    data-testid="recipe-category"
+                  >
+                    {useDrink.drinks[0].strAlcoholic}
+                  </p>
+                </div>
+                <div className="button-container">
+                  <ShareBtn
+                    recipeId={ useDrink.drinks[0].idDrink }
+                    url="/drinks"
+                    dataTestId="share-btn"
+                  />
+                  <FavoriteBtn
+                    recipe={ useDrink.drinks[0] }
+                    url="/drinks"
+                    dataTestId="favorite-btn"
+                  />
+                </div>
 
-            </div>
-            <div>
-              <p>Instructions</p>
-              <div data-testid="instructions">{useDrink.drinks[0].strInstructions}</div>
-            </div>
-            <div className="scrollmenu">
-              <p>Recommended</p>
-              {(showRecommended()) && (
-                showRecommended()
-                  .map((card, index) => (
-                    <div
+              </div>
+
+              <div className="ingredients-container">
+                <h3 className="title-ingredient">Ingredients</h3>
+                {(handleIngredients()) && (handleIngredients())
+                  .map((values, index) => (
+                    <p
+                      data-testid={ `${index}-ingredient-name-and-measure` }
                       key={ index }
-                      data-testid={ `${index}-recomendation-card` }
                     >
-                      <img
-                        style={ { width: '150px' } }
-                        src={ card.strMealThumb }
-                        alt="recommeended meal"
-                      />
-                      <div>
-                        <h4>{card.strCategory}</h4>
-                        <h3
-                          className="heading-recomendation"
-                          data-testid={ `${index}-recomendation-title` }
-                        >
-                          {card.strMeal}
-                        </h3>
-                      </div>
+                      {values}
+                    </p>))}
 
-                    </div>
-                  ))
-              )}
-            </div>
-            {!getFinished(useDrink.drinks[0].idDrink) && <HandleBtn
-              url="/drinks"
-              drinks={ useDrink.drinks[0] }
-            />}
-          </div>)}
-      </form>
-    </div>
+              </div>
+              <div className="instructions-container">
+                <p>Instructions</p>
+                <div data-testid="instructions">{useDrink.drinks[0].strInstructions}</div>
+              </div>
+              <div className="recommended-container">
+                <p>Recommended</p>
+                <div className="scrollmenu">
+                  {(showRecommended()) && (
+                    showRecommended()
+                      .map((card, index) => (
+                        <div
+                          key={ index }
+                          data-testid={ `${index}-recomendation-card` }
+                        >
+                          <img
+                            style={ { width: '150px' } }
+                            src={ card.strMealThumb }
+                            alt="recommeended meal"
+                          />
+                          <div>
+                            <h4>{card.strCategory}</h4>
+                            <h3
+                              className="heading-recomendation"
+                              data-testid={ `${index}-recomendation-title` }
+                            >
+                              {card.strMeal}
+                            </h3>
+                          </div>
+
+                        </div>
+                      ))
+                  )}
+                </div>
+              </div>
+              <StyledHandleBtn>
+                {!getFinished(useDrink.drinks[0].idDrink) && <HandleBtn
+                  url="/drinks"
+                  drinks={ useDrink.drinks[0] }
+                />}
+              </StyledHandleBtn>
+            </div>)}
+        </form>
+      </div>
+    </StyledRecipeDetails>
   );
 }

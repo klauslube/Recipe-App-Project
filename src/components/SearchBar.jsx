@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import fetchApi from '../helpers/fetchApi';
 import { actionCreators } from '../redux/actions';
+import { StyledSearchBar } from '../styles/StyledHeader';
 
 function SearchBar() {
   const history = useHistory();
@@ -48,17 +49,19 @@ function SearchBar() {
   };
 
   return (
-    <section>
-      <form onSubmit={ submitSearch }>
+    <StyledSearchBar>
+      <form onSubmit={ submitSearch } className="search-bar">
         <div>
           <input
+            className="search-recipe"
             type="text"
             data-testid="search-input"
             value={ searchText }
             onChange={ changeSearch }
+            placeholder="Search Recipe"
           />
         </div>
-        <div>
+        <div className="search-ingredients">
           <label htmlFor="searchIngredient">
             <input
               id="searchIngredient"
@@ -97,7 +100,7 @@ function SearchBar() {
           Search
         </button>
       </form>
-    </section>
+    </StyledSearchBar>
   );
 }
 

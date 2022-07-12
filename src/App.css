@@ -15,31 +15,12 @@
   max-height: 80vh;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
   font-size: 3em;
   font-weight: 900;
-}
-
-.startRecipe-btn {
-  bottom: 0;
-  position: fixed;
 }
 
 @keyframes shake {
@@ -70,42 +51,4 @@
   100% {
     transform: rotate(-10deg);
   }
-}
-
-.scrollmenu {
-  display : flex;
-  overflow: auto;
-  white-space: nowrap;
-  width: 360px;
-}
-
-.scrollmenu div {
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  width: 60%;
-}
-
-.scrollmenu div:hover {
-  background-color: #777;
-}
-
-.heading-recomendation {
-  color: black;
-}
-
-.video-responsive {
-  height: 0;
-  overflow: hidden;
-  padding-bottom: 56.25%;
-  position: relative;
-}
-
-.video-responsive iframe {
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 360px;
 }

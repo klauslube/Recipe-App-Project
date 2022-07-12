@@ -50,6 +50,7 @@ describe('testa o componente Profile e suas funcionalidades', () => {
     const logOutBtn = screen.getAllByRole('button')[2];
     userEvent.click(logOutBtn);
     localStorage.clear();
+    // expect(localStorage).toBe({});
     history.push('/');
     expect(history.location.pathname).toBe('/');
   });

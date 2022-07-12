@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
+import StyledHeader from '../styles/StyledHeader';
 
 export default function Header({ title, search }) {
   const [toggle, setToggle] = useState(false);
@@ -16,27 +17,29 @@ export default function Header({ title, search }) {
   const handleSearch = () => { setToggle(!toggle); };
 
   return (
-    <div>
-      <input
-        onClick={ PushProfile }
-        type="image"
-        data-testid="profile-top-btn"
-        src={ profileIcon }
-        alt="profile-icon"
-      />
-      <h1 data-testid="page-title">{title}</h1>
-      {search
+    <StyledHeader>
+      <div className="header-container">
+        <input
+          className="profile-icon"
+          onClick={ PushProfile }
+          type="image"
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="profile-icon"
+        />
+        <h1 data-testid="page-title">{title}</h1>
+        {search
       && <input
+        className="search-icon"
         onClick={ handleSearch }
         type="image"
         data-testid="search-top-btn"
         src={ searchIcon }
         alt="search-icon"
       />}
-      <div>
-        { toggle && <SearchBar /> }
       </div>
-    </div>
+      { toggle && <SearchBar /> }
+    </StyledHeader>
   );
 }
 

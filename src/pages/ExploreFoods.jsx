@@ -3,6 +3,10 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fetchApi from '../helpers/fetchApi';
+import StyledExploreFoods from '../styles/StyledExploreFoods';
+import ingredientIcon from '../images/ingredientIcon.svg';
+import supriseIcon from '../images/supriseIcon.svg';
+import nationIcon from '../images/exploreIcon.svg';
 
 export default function ExploreFoods() {
   const history = useHistory();
@@ -15,37 +19,58 @@ export default function ExploreFoods() {
   }, []);
 
   return (
-    <div>
+    <StyledExploreFoods>
       <Header title="Explore Foods" />
-      <div>
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-          onClick={ () => history.push('/explore/foods/ingredients') }
-        >
-          By Ingredient
-        </button>
-      </div>
-      <div>
-        <button
-          type="button"
-          data-testid="explore-by-nationality"
-          onClick={ () => history.push('/explore/foods/nationalities') }
-        >
-          By Nationality
-        </button>
-      </div>
-      {data && (
-        <div>
+      <div className="wrapper">
+        <div className="cards">
+          <p>
+            By
+            <br />
+            Ingredient
+          </p>
           <button
             type="button"
-            data-testid="explore-surprise"
-            onClick={ () => history.push(`/foods/${data[0].idMeal}`) }
+            data-testid="explore-by-ingredient"
+            onClick={ () => history.push('/explore/foods/ingredients') }
           >
-            Surprise me!
+            <img src={ ingredientIcon } alt="icon" />
           </button>
-        </div>)}
+
+        </div>
+        <div className="cards">
+          <p>
+            By
+            <br />
+            Nationality
+          </p>
+          <button
+            type="button"
+            data-testid="explore-by-nationality"
+            onClick={ () => history.push('/explore/foods/nationalities') }
+          >
+
+            <img src={ nationIcon } alt="icon" />
+          </button>
+        </div>
+        {data && (
+          <div className="cards">
+            <p>
+              Surprise
+              <br />
+              me!
+            </p>
+            <button
+              type="button"
+              className="surpriseIcon"
+              data-testid="explore-surprise"
+              onClick={ () => history.push(`/foods/${data[0].idMeal}`) }
+            >
+
+              <img src={ supriseIcon } alt="icon" />
+            </button>
+          </div>)}
+      </div>
       <Footer />
-    </div>
+    </StyledExploreFoods>
   );
 }
