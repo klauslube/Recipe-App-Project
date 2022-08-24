@@ -1,5 +1,5 @@
 # Bem vindo ao Recipes App project!
-Esse é um projeto em grupo desenvolvido na [Trybe's](https://www.betrybe.com/) no modulo Frontend .
+Esse é um projeto em grupo desenvolvido na [Trybe](https://www.betrybe.com/) no modulo Frontend .
 
 
 # Sumário
